@@ -8,7 +8,7 @@ const { Country } = require("../db");
 
 // TRAIGO TODA LA INFO DE LA API SI ES QUE LA DB ESTA VACIA
 const loadDB = async () => {
-  const full = await Country.count(); // -> verifico si la tabla esta llena
+  const full = await Country.count(); // -> verifico si la tabla ya esta llena
   if (!full) {
     const api = await axios.get("https://restcountries.com/v3/all");
     const data = api.data.map((el) => {
@@ -24,9 +24,11 @@ const loadDB = async () => {
       };
     });
     await Country.bulkCreate(data); // -> lleno la DB con todos los paises
-    console.log("LLAME A LA API");
+    console.log("I CALL THE API WITH AXIOS.GET");
+  } else {
+    console.log("DB HAD ALREADY DATA");
   }
-  console.log("DB FILLED");
+  console.log("DB IS ALREADY FILLED");
 };
 
 module.exports = loadDB; // -> exporto la funcion para llamarla desde el index.js

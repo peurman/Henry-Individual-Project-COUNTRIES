@@ -21,8 +21,8 @@ const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const loadDB = require("./src/loadDB/loadDB.js");
 
-// Syncing all the models at once.
-conn.sync({ force: true }).then(async () => {
+// Syncing all the models at once -> hago FORCE FALSE para no llamar a la API cada vez que se ejecuta el server
+conn.sync({ force: false }).then(async () => {
   try {
     await loadDB(); // CARGO la DB!!
     server.listen(3001, () => {
