@@ -52,6 +52,16 @@ const { Country, Activity } = sequelize.models;
 Country.belongsToMany(Activity, { through: "Country_Activity" });
 Activity.belongsToMany(Country, { through: "Country_Activity" });
 
+// para ver los MIXINS generados de cada modelo Country o Activity
+// const model = Activity; // yourSequelizeModel
+// for (let assoc of Object.keys(model.associations)) {
+//   for (let accessor of Object.keys(model.associations[assoc].accessors)) {
+//     console.log(
+//       model.name + "." + model.associations[assoc].accessors[accessor] + "()"
+//     );
+//   }
+// }
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
