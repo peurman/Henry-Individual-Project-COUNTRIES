@@ -1,0 +1,72 @@
+#titleCountry {
+  font-size: 45px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #09e7f6;
+}
+#titleActivities {
+  font-size: 27px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #00e5ff;
+}
+
+#titleMap {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#activity {
+  font-weight: bolder;
+}
+.listActivities {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.activities {
+  width: 100%;
+}
+.reff {
+  font-size: 13px;
+}
+.bottomDetail {
+  display: flex;
+  justify-content: center;
+}
+
+.detailsSpace {
+  width: 100%;
+  display: flex;
+  justify-content: center; /*Centro la tarjeta*/
+}
+
+.detailsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #1f3650e8;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+  width: 50%;
+}
+
+.info {
+  width: 80%;
+  color: white;
+}
+
+.flag {
+  width: 350px;
+  border-radius: 20px;
+}
+
+.fetching {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

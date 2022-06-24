@@ -28,7 +28,7 @@ const getCountries = async (req, res) => {
           [Op.iLike]: "%" + name + "%", // -> si contiene name
         },
       },
-      order: [["name", "ASC"]],
+      // order: [["name", "ASC"]],
     });
     if (response.length === 0) {
       return res
@@ -40,11 +40,11 @@ const getCountries = async (req, res) => {
     const response = await Country.findAll({
       where: {
         [Op.or]: [
-          {
-            subregion: {
-              [Op.iLike]: "%" + filter + "%", // -> si contiene filter
-            },
-          },
+          // {
+          //   subregion: {
+          //     [Op.iLike]: "%" + filter + "%", // -> si contiene filter
+          //   },
+          // },
           {
             continent: {
               [Op.iLike]: "%" + filter + "%", // -> si contiene filter
@@ -52,7 +52,7 @@ const getCountries = async (req, res) => {
           },
         ],
       },
-      order: [["name", "ASC"]],
+      // order: [["name", "ASC"]],
     });
     if (response.length === 0) {
       return res.status(404).send(`Cannot apply filter ${filter}`);
@@ -62,7 +62,7 @@ const getCountries = async (req, res) => {
     const response = await Country.findAll({
       limit: 250,
       offset: req.query.page ? req.query.page : 0,
-      order: [["name", req.query.order ? req.query.order : "ASC"]],
+      // order: [["name", req.query.order ? req.query.order : "ASC"]],
       include: { model: Activity },
     });
     if (response.length === 0) {

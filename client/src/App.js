@@ -1,9 +1,16 @@
-import './App.css';
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+// modelos que renderizo:
+import Landing from "./components/Landing/Landing";
+import Previous from "./components/Previous/Previous";
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Countries</h1>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/*" element={<Previous />} />
+      </Routes>
     </div>
   );
 }
