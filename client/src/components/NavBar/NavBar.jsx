@@ -1,11 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import "../../styles/Nav.modules.css";
+
 export default function SearchBar() {
   return (
-    <div>
-      <NavLink to="/home">Home</NavLink>
-      <NavLink to="/activities">Create Activity</NavLink>
+    <div className="nav">
+      <NavLink to="/home" className="menu">
+        Home
+      </NavLink>
+      <NavLink to="/activities" className="menu">
+        Create Activity
+      </NavLink>
+      <NavLink to="/about" className="menu">
+        About
+      </NavLink>
     </div>
   );
 }

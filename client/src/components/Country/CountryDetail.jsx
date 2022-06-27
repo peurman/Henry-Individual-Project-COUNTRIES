@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // acciones que voy a usar:
-import { getCountryDetail, emptyState } from "../../redux/actions";
+import { getCountryDetail } from "../../redux/actions";
 import "../../styles/CountryDetail.modules.css";
 
 const CountryDetail = (props) => {
@@ -12,7 +12,8 @@ const CountryDetail = (props) => {
 
   React.useEffect(() => {
     dispatch(getCountryDetail(id)); // -> llena "countryDetail" del estado global
-    return () => dispatch({ type: "EMPTY_STATE" }); //????????????{ type: "EMPTY_STATE"} emptyState()
+    console.log("FILTRO PAIS DESDE COUNTRYDETAIL");
+    return () => dispatch({ type: "EMPTY_STATE" }); // emptyState()
   }, [dispatch, id]); // -> dependencia en dispatch para evitar repecitiones, y cada vez q actualiza ID
 
   return (
@@ -48,25 +49,25 @@ const CountryDetail = (props) => {
               <span>Population: {countryDet.population}</span>
             </div>
             <br />
-            <span id="titleMap">MAPA</span>
+            {/* <span id="titleMap">MAPA</span>
             <hr />
             <div>
-              {/* <iframe
+              <iframe
                 title={countryDet.id}
                 width="80%"
                 height="150"
                 style={{ border: "0", marginTop: "10px", borderRadius: "10px" }}
                 src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC36GHRjga4WoOy0LsfWII_QhSJb2DQWRk&q=${countryDet.name}`}
-              ></iframe> */}
-            </div>
+              ></iframe>
+            </div> */}
             <div className="bottomDetail">
               <div className="activities">
                 <br />
                 <span id="titleActivities">Activities</span>
                 <br />
                 <span className="reff">
-                  (Refference of Difficulties: 1-Easy, 2-Upper easy, 3-Medium,
-                  4-Hard, 5-Pro)
+                  (Difficulty levels: 1- very easy / 2-easy / 3-medium /
+                  4-difficult / 5-very difficult)
                 </span>
                 <hr />
                 <div className="listActivities">

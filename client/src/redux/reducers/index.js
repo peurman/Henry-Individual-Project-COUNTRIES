@@ -7,6 +7,7 @@ import {
   CREATE_ACTIVITY,
   GET_ALL_ACTIVITIES,
   EMPTY_STATE,
+  UPDATE_COUNTRIES,
   // DELETE_ACTIVITY, // NO PEDIDA
 } from "../actions";
 
@@ -55,7 +56,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         countryDetail: {},
       };
-
+    case UPDATE_COUNTRIES:
+      return {
+        ...state,
+        countries: action.payload, // todos los paises ordenados
+      };
     // ↓↓↓↓↓↓↓↓NO PEDIDA↓↓↓↓↓↓↓↓
     // case DELETE_ACTIVITY:
     //   return {

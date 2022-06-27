@@ -5,6 +5,7 @@ export const GET_COUNTRIES_BY_FILTER = "GET_COUNTRIES_BY_FILTER";
 export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const GET_ALL_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export const EMPTY_STATE = "EMPTY_STATE";
+export const UPDATE_COUNTRIES = "UPDATE_COUNTRIES";
 // export const DELETE_ACTIVITY = "DELETE_ACTIVITY"; // NO PEDIDA
 
 const axios = require("axios"); // también uso fetch
@@ -120,6 +121,13 @@ export const getAllActivities = () => async (dispatch) => {
 export const emptyState = () => (dispatch) => {
   dispatch({
     type: EMPTY_STATE,
+  });
+};
+
+export const updateCountries = (value) => (dispatch) => {
+  dispatch({
+    type: UPDATE_COUNTRIES,
+    payload: value,
   });
 };
 

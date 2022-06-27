@@ -5,7 +5,7 @@ const Landing = () => {
   return (
     <div>
       <h1>WELCOME TO COUNTRIES WEB!</h1>
-      <NavLink exact to="/home">
+      <NavLink to="/home">
         <div>
           <button>GO</button>
         </div>

@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 10px 20px 0px 20px;
+  padding: 10px;
+  background: rgb(72, 70, 107);
+  border-radius: 20px;
+}
+
+.menu {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}

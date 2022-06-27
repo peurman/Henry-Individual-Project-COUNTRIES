@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; // -> useEffect a quitar
 import { useDispatch, useSelector } from "react-redux";
 
 // acciones a usar:
@@ -8,6 +8,7 @@ import {
   getCountryxSearch,
   getCountriesxFilter,
   getAllActivities,
+  updateCountries, // a activar
 } from "../../redux/actions";
 
 // Componentes a usar:
@@ -21,14 +22,14 @@ export default function Home() {
   // GLOBAL
   const dispatch = useDispatch();
   const totalCountries = useSelector((state) => state.countries); // -> uso estado global para traerme los paises
+  const totalActivities = useSelector((state) => state.activities); // -> uso estado global para traerme las actividades
   // LOCAL
   const [currentPage, setCurrentPage] = useState(1); // -> para el paginado, arranco en 1
   const [countriesPerPage] = useState(10); // -> para el paginado, defino 10 x pag o el NRO que quiera
 
-  const [switcher, setSwitcher] = useState("false"); // -> para el ordenamiento > NO FUNCIONA
+  const [switcher, setSwitcher] = useState("all"); // -> para el ordenamiento > NO FUNCIONA
   const [nameFiltered, setName] = useState(""); // -> para el filtrado x NOMBRE
-
-  const [countryList, setCountryList] = useState(totalCountries);
+  // const [countryList, setCountryList] = useState(totalCountries); // A SACAR
 
   //PAGINADO
   const indexOfLastCountry =
@@ -45,13 +46,14 @@ export default function Home() {
 
   // GET PAISES y GET ACTIVITIES al BACK
   useEffect(() => {
+    console.log("PIDO PAISES Y ACTIVIDADES DESDE HOME");
     dispatch(getAllCountries()); // -> me traigo todos los países
     dispatch(getAllActivities()); // -> me traigo todas las actividades
   }, [dispatch]); // -> dependencia en dispatch para evitar repecitiones
 
   // Metodo para ORDENAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NO FUNCIONA!!!!
-  function ordering() {
-    if (switcher === "AZ") {
+  function ordering(e) {
+    if (e.target.value === "AZ") {
       totalCountries.sort(function (a, b) {
         if (a.name > b.name) {
           return 1;
@@ -61,8 +63,9 @@ export default function Home() {
         }
         return 0;
       });
+      document.getElementById("filterPop").selectedIndex = 0;
     }
-    if (switcher === "ZA") {
+    if (e.target.value === "ZA") {
       totalCountries.sort(function (b, a) {
         if (a.name > b.name) {
           return 1;
@@ -72,21 +75,26 @@ export default function Home() {
         }
         return 0;
       });
+      document.getElementById("filterPop").selectedIndex = 0;
     }
-    if (switcher === "popUP") {
+    if (e.target.value === "popUP") {
       totalCountries.sort(function (a, b) {
         return a.population - b.population;
       });
+      document.getElementById("filterAZ").selectedIndex = 0;
     }
-    if (switcher === "popDOWN") {
+    if (e.target.value === "popDOWN") {
       totalCountries.sort(function (a, b) {
         return b.population - a.population;
       });
+      document.getElementById("filterAZ").selectedIndex = 0;
     }
-    setCountryList(totalCountries);
+    setSwitcher(e.target.value);
+    console.log("ORDENO PAISES DESDE HOME");
+    dispatch(updateCountries(totalCountries)); // -> actualiza estado global "countries"
   }
   // DETECTAR CAMBIOS
-  useEffect(() => {}, [switcher, countryList]); // -> NO FUNCIONA!!!
+  // useEffect(() => {}, [switcher, countryList]); // -> NO FUNCIONA!!!
 
   // FILTRO POR NOMBRE
   function handleInputChange(e) {
@@ -95,9 +103,10 @@ export default function Home() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!nameFiltered) {
-      alert("You have to write somethig to do the search");
+      alert("You have to write something to do the search");
     }
     setCurrentPage(1);
+    console.log("FILTRO PAISES DESDE HOME");
     dispatch(getCountryxSearch(nameFiltered)); // -> llena "countryDetail" del estado global
     setName(""); // -> borro el estado luego al disparar la busqueda
   }
@@ -105,6 +114,8 @@ export default function Home() {
   // FILTRO POR CONTINENTE
   function handleFilterxContinent(e) {
     setCurrentPage(1);
+    console.log("FILTRO CONTINENTE DESDE HOME");
+    updateFilter();
     dispatch(getCountriesxFilter(e.target.value)); // -> llena "countryDetail" del estado global
   }
 
@@ -112,6 +123,12 @@ export default function Home() {
   function handlexActivity(e) {
     // dispatch(countryByActivity(e.target.value));
     // setCurrentPage(1);
+  }
+  //reseteo ambos filtros
+  function updateFilter() {
+    document.getElementById("filterAZ").selectedIndex = 0;
+    document.getElementById("filterPop").selectedIndex = 0;
+    document.getElementById("filterAct").selectedIndex = 0;
   }
 
   return (
@@ -130,12 +147,14 @@ export default function Home() {
         <span>
           <select
             className="filter"
+            id="filterAZ"
             onChange={(e) => {
-              setSwitcher(e.target.value);
-              ordering();
+              ordering(e);
             }}
           >
-            <option>Alfabetically</option>
+            <option value="1" hidden>
+              Order Alfabetically...
+            </option>
             <option value="AZ">A - Z</option>
             <option value="ZA">Z - A</option>
           </select>
@@ -143,12 +162,14 @@ export default function Home() {
         <span>
           <select
             className="filter"
+            id="filterPop"
             onChange={(e) => {
-              setSwitcher(e.target.value);
-              ordering();
+              ordering(e);
             }}
           >
-            <option>Population</option>
+            <option value="0" hidden>
+              Order by Population...
+            </option>
             <option value="popUP">Ascendant</option>
             <option value="popDOWN">Descendant</option>
           </select>
@@ -156,9 +177,11 @@ export default function Home() {
         <span>
           <select
             className="filter"
-            onChange={(e) => handleFilterxContinent(e)}
+            onChange={(e) => {
+              handleFilterxContinent(e);
+            }}
           >
-            <option>Continent</option>
+            <option hidden>Filer by Continent...</option>
             <option value="Africa">Africa</option>
             <option value="America">America</option>
             <option value="Antarctic">Antarctic</option>
@@ -168,13 +191,21 @@ export default function Home() {
           </select>
         </span>
         <span>
-          <select className="filter" onChange={(e) => handlexActivity(e)}>
-            <option value={"All"}>Activity</option>
-            {/* {(act) => (
-              <option key={act} value={act}>
-                {act}
-              </option>
-            )} */}
+          <select
+            id="filterAct"
+            className="filter"
+            onChange={(e) => handlexActivity(e)}
+          >
+            <option value="0" hidden>
+              Filer by Activity...
+            </option>
+            {totalActivities?.map((curr) => {
+              return (
+                <option key={curr.id} id={curr.id}>
+                  {curr.name}
+                </option>
+              );
+            })}
           </select>
         </span>
       </div>
