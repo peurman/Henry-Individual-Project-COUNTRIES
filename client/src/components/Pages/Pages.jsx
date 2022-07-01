@@ -1,4 +1,4 @@
-import "../../styles/Pages.modules.css";
+import "../../styles/Pages.css";
 
 export default function Pages({
   countriesPerPage,

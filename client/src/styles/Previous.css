@@ -1,0 +1,16 @@
+.base {
+  background-image: url("../assests/LandingA.jpg");
+  background-size: 100%;
+  background-position: 100%;
+  background-position: center;
+  background-repeat: repeat;
+  height: 100vh;
+  backdrop-filter: blur(20px);
+  backdrop-filter: sepia(10%);
+}
+
+.separation {
+  /* margin: 10px; */
+  /* padding: 0px; */
+  /* margin-bottom: 5px; */
+}

@@ -8,6 +8,7 @@ import {
   GET_ALL_ACTIVITIES,
   EMPTY_STATE,
   UPDATE_COUNTRIES,
+  // COUNTRY_BY_ACTIVITY, // -> lo hago en Home
   // DELETE_ACTIVITY, // NO PEDIDA
 } from "../actions";
 
@@ -61,6 +62,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         countries: action.payload, // todos los paises ordenados
       };
+    // case COUNTRY_BY_ACTIVITY: // -> lo hago en componente HOME
+    //   const allcountries = state.countries;
+    //   const countriesFiltered = allcountries.filter((c) =>
+    //           c.activities.find((a) => a.id === action.payload)
+    //         );
+    //   return {
+    //     ...state,
+    //     countries: countriesFiltered, // los paises filtrados segun actividad
+    //   };
+
     // ↓↓↓↓↓↓↓↓NO PEDIDA↓↓↓↓↓↓↓↓
     // case DELETE_ACTIVITY:
     //   return {

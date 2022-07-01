@@ -1,0 +1,28 @@
+/*****CONTAINERS+++++*/
+.base3 {
+  background-image: url("../assests/LandingA.jpg");
+  background-size: 100%; /* contain, cover,auto;*/
+  background-position: 100%;
+  background-position: center;
+  background-repeat: repeat;
+  backdrop-filter: blur(20px);
+  backdrop-filter: sepia(10%);
+  height: 100vh;
+}
+.containerB3 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.containerC3 {
+  /* display: flex;
+  flex-direction: column; */
+  /* flex-wrap: wrap; */
+  justify-content: center;
+  background: rgba(69, 77, 81, 0.899);
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+  width: 70%;
+  backdrop-filter: blur(1px);
+}

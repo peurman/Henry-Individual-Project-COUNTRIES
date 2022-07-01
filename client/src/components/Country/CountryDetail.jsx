@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // acciones que voy a usar:
 import { getCountryDetail } from "../../redux/actions";
-import "../../styles/CountryDetail.modules.css";
+import "../../styles/CountryDetail.css";
 
 const CountryDetail = (props) => {
   const { id } = useParams(); // -> me traigo ID x params
@@ -16,77 +16,66 @@ const CountryDetail = (props) => {
     return () => dispatch({ type: "EMPTY_STATE" }); // emptyState()
   }, [dispatch, id]); // -> dependencia en dispatch para evitar repecitiones, y cada vez q actualiza ID
 
+  var upperName = countryDet.name?.toUpperCase(); // -> muerto el nombre en MAYUSC
+
   return (
-    <div className="visual">
-      <div className="detailsSpace">
-        <div className="detailsContainer">
-          <div className="info" style={{ zIndex: "9999" }}>
-            <div className="headerInfo">
-              <span id="titleCountry">{countryDet.name}</span>
+    <div className="containerA1">
+      <div className="containerB1">
+        <div className="containerC1">
+          <div className="containerD1">
+            <div className="containerE1">
+              <span id="countryTitle">{upperName}</span>
             </div>
             <hr />
-            <br />
             <div>
               <img className="flag" alt="img" src={`${countryDet.flag}`} />
             </div>
-            <br />
-            <div className="fetching">
-              <span>Code: {countryDet.id}</span>
+            <div className="containerCharact">
+              <div className="containerCharactFirst">
+                <p>Code:</p>
+                <p>{countryDet.id}</p>
+              </div>
+              <div className="containerCharactCenter">
+                <p>Capital:</p>
+                <p>{countryDet.capital}</p>
+              </div>
+              <div className="containerCharactCenter">
+                <p>Location:</p>
+                <p>{countryDet.subregion}</p>
+              </div>
+              <div className="containerCharactCenter">
+                <p>Continent:</p>
+                <p>{countryDet.continent}</p>
+              </div>
+              <div className="containerCharactCenter">
+                <p>Area:</p>
+                <p>{countryDet.area} km2</p>
+              </div>
+              <div className="containerCharactLast">
+                <p>Population:</p>
+                <p>{countryDet.population} habitants</p>
+              </div>
             </div>
-            <div className="fetching">
-              <span>Capital: {countryDet.capital}</span>
-            </div>
-            <div className="fetching">
-              <span>Location: {countryDet.subregion}</span>
-            </div>
-            <div className="fetching">
-              <span>Continent: {countryDet.continent}</span>
-            </div>
-            <div className="fetching">
-              <span>Area: {countryDet.area} km2 </span>
-            </div>
-            <div className="fetching">
-              <span>Population: {countryDet.population}</span>
-            </div>
-            <br />
-            {/* <span id="titleMap">MAPA</span>
-            <hr />
-            <div>
-              <iframe
-                title={countryDet.id}
-                width="80%"
-                height="150"
-                style={{ border: "0", marginTop: "10px", borderRadius: "10px" }}
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyC36GHRjga4WoOy0LsfWII_QhSJb2DQWRk&q=${countryDet.name}`}
-              ></iframe>
-            </div> */}
-            <div className="bottomDetail">
-              <div className="activities">
-                <br />
-                <span id="titleActivities">Activities</span>
-                <br />
-                <span className="reff">
+            <div className="containerActA1">
+              <div className="containerActB1">
+                <p id="activityTitle">Activities</p>
+                <span className="refLevels">
                   (Difficulty levels: 1- very easy / 2-easy / 3-medium /
                   4-difficult / 5-very difficult)
                 </span>
                 <hr />
-                <div className="listActivities">
+                <div className="containerListAct">
                   {countryDet.activities?.length > 0 ? (
                     countryDet.activities.map((a) => (
-                      <div key={a.id} style={{ padding: "15px" }}>
-                        <span id="activity">{a.name}</span>
-                        <br />
-                        Duration: <span>{a.duration} hs</span>
-                        <br />
-                        Difficulty: <span>{a.difficulty} </span>
-                        <br />
-                        Season: <span>{a.season} </span>
-                        <br />
-                        <br />
+                      <div className="containerListActEach" key={a.id}>
+                        <p id="activityName">{a.name}</p>
+                        <p>Duration: {a.duration} hs</p>
+                        <p>Difficulty: {a.difficulty} </p>
+                        <p>Season: {a.season} </p>
                       </div>
                     ))
                   ) : (
-                    <span>No activites were created </span>
+                    <p>No activites were created </p>
                   )}
                 </div>
               </div>

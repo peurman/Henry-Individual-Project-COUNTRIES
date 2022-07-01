@@ -6,6 +6,10 @@ const { Country } = require("../db");
 // GET https://restcountries.com/v3/name/{name}
 // GET https://restcountries.com/v3/alpha/{code}
 
+const removeDiacritics = (str) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036fÅ]/g, ""); // elimino acentos y caracter Å
+};
+
 // TRAIGO TODA LA INFO DE LA API SI ES QUE LA DB ESTA VACIA
 const loadDB = async () => {
   const full = await Country.count(); // -> verifico si la tabla ya esta llena
@@ -14,7 +18,7 @@ const loadDB = async () => {
     const data = api.data.map((el) => {
       return {
         id: el.cca3,
-        name: el.name.common,
+        name: removeDiacritics(el.name.common),
         flag: el.flags[1],
         continent: el.continents[0],
         capital: el.capital ? el.capital[0] : "doesn't have capital",

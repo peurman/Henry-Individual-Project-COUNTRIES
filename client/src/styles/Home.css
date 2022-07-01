@@ -1,3 +1,13 @@
+.base2 {
+  background-image: url("../assests/LandingA.jpg");
+  background-size: 100%; /* contain, cover,auto;*/
+  background-position: 100%;
+  background-position: center;
+  background-repeat: repeat;
+  /* height: 100vh; */
+  backdrop-filter: blur(20px);
+  backdrop-filter: sepia(10%);
+}
 .countryContainer {
   display: flex;
   flex-direction: row;
@@ -6,18 +16,23 @@
   justify-content: space-evenly;
   margin: 0px 20px 0px 20px;
   width: 100%;
-  background: rgb(72, 70, 107);
+  background: rgba(69, 77, 81, 0.899);
+  height: 100vh;
   border-radius: 0 0 20px 20px;
+  backdrop-filter: blur(1px);
   /* background: linear-gradient(
     180deg,
     rgba(20, 20, 20, 0.20772058823529416) 10%,
     rgba(12, 90, 57, 0.76) 50%
   ); */
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .countrySpace {
   display: flex;
   justify-content: flex-end;
+  padding-bottom: 0px;
 }
 
 .paginatorSpace {
@@ -31,19 +46,50 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  background-color: rgb(72, 70, 107);
+  background: rgba(69, 77, 81, 0.899);
   width: 100%;
   margin: 0px 20px 0px 20px;
   border-radius: 0px 0px 0px 0px;
+  backdrop-filter: blur(1px);
 }
 
 .paginatorContainer button {
   background-color: #1b2d4e00;
   border: none;
-  color: #ffffff;
+  color: whitesmoke;
 }
-#pag {
+
+.paginatorBorder {
+  border-radius: 10px;
+  border: 2px solid gray;
+  border-style: groove;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 0%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* backdrop-filter: blur(1px); */
+}
+
+#pagPrevNext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid silver;
+  padding: 5px;
+  background-color: #00ccffe5;
+  transition: 0.5s;
+}
+
+#pagPrevNext:hover {
+  background-color: #2e4a7fda;
+  color: #00ccffe5;
+  border: 1px solid #00ccffe5;
+  transition: 0.5s;
 }
 
 .consola {
@@ -53,10 +99,10 @@
   align-items: center;
   justify-content: space-evenly;
   margin: 10px 20px 0px 20px;
-  background: rgb(72, 70, 107);
+  padding: 10px;
+  background: rgba(69, 77, 81, 0.899);
   border-radius: 20px 20px 0px 0px;
-  position: relative;
-  top: 0%;
+  backdrop-filter: blur(1px);
 }
 
 .filtro {
@@ -69,7 +115,7 @@
   margin: 20px;
 }
 
-.filter {
+.filterHome {
   background-color: #2e4a7fda;
   color: #00ccffe5;
   border-radius: 10px;
@@ -103,6 +149,29 @@
   border: none;
   margin: 0px;
   padding: 10px 10px 10px 0px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button {
+  background-color: #00ccffe5;
+  color: #2e4a7fda;
+  font-size: 17px;
+  border-radius: 10px;
+  border: 1px solid #929191;
+  margin: 0px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background-color: #2e4a7fda;
+  color: #00ccffe5;
+  border-radius: 10px;
+  border: 1px solid #929191;
+  margin: 0px;
+  padding: 10px;
   cursor: pointer;
   transition: 0.3s;
 }

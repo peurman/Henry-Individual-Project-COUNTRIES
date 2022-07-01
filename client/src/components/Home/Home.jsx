@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react"; // -> useEffect a quitar
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // acciones a usar:
@@ -8,28 +8,30 @@ import {
   getCountryxSearch,
   getCountriesxFilter,
   getAllActivities,
-  updateCountries, // a activar
+  updateCountries,
+  // countryByActivity,
 } from "../../redux/actions";
 
 // Componentes a usar:
 import Card from "../Card/Card";
 import Pages from "../Pages/Pages";
+import NavBar from "../NavBar/NavBar";
 // estilos:
-import "../../styles/Home.modules.css";
+import "../../styles/Home.css";
 
 // Comp HOME -> traigo TODOS los paises + FILTROS + ORDEN
 export default function Home() {
   // GLOBAL
   const dispatch = useDispatch();
-  const totalCountries = useSelector((state) => state.countries); // -> uso estado global para traerme los paises
-  const totalActivities = useSelector((state) => state.activities); // -> uso estado global para traerme las actividades
+  const totalCountries = useSelector((state) => state.countries); // -> uso estado GLOBAL para traer los paises
+  const totalActivities = useSelector((state) => state.activities); // -> uso estado GLOBAL para traer las actividades
   // LOCAL
   const [currentPage, setCurrentPage] = useState(1); // -> para el paginado, arranco en 1
   const [countriesPerPage] = useState(10); // -> para el paginado, defino 10 x pag o el NRO que quiera
 
-  const [switcher, setSwitcher] = useState("all"); // -> para el ordenamiento > NO FUNCIONA
+  const [switcher, setSwitcher] = useState("all"); // -> para el ordenamiento
   const [nameFiltered, setName] = useState(""); // -> para el filtrado x NOMBRE
-  // const [countryList, setCountryList] = useState(totalCountries); // A SACAR
+  // const [filteredActivity, setFilteredActivity] = useState(false);
 
   //PAGINADO
   const indexOfLastCountry =
@@ -52,8 +54,8 @@ export default function Home() {
   }, [dispatch]); // -> dependencia en dispatch para evitar repecitiones
 
   // Metodo para ORDENAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NO FUNCIONA!!!!
-  function ordering(e) {
-    if (e.target.value === "AZ") {
+  function ordering(val) {
+    if (val === "AZ") {
       totalCountries.sort(function (a, b) {
         if (a.name > b.name) {
           return 1;
@@ -65,7 +67,7 @@ export default function Home() {
       });
       document.getElementById("filterPop").selectedIndex = 0;
     }
-    if (e.target.value === "ZA") {
+    if (val === "ZA") {
       totalCountries.sort(function (b, a) {
         if (a.name > b.name) {
           return 1;
@@ -77,19 +79,19 @@ export default function Home() {
       });
       document.getElementById("filterPop").selectedIndex = 0;
     }
-    if (e.target.value === "popUP") {
+    if (val === "popUP") {
       totalCountries.sort(function (a, b) {
         return a.population - b.population;
       });
       document.getElementById("filterAZ").selectedIndex = 0;
     }
-    if (e.target.value === "popDOWN") {
+    if (val === "popDOWN") {
       totalCountries.sort(function (a, b) {
         return b.population - a.population;
       });
       document.getElementById("filterAZ").selectedIndex = 0;
     }
-    setSwitcher(e.target.value);
+    setSwitcher(val);
     console.log("ORDENO PAISES DESDE HOME");
     dispatch(updateCountries(totalCountries)); // -> actualiza estado global "countries"
   }
@@ -108,21 +110,53 @@ export default function Home() {
     setCurrentPage(1);
     console.log("FILTRO PAISES DESDE HOME");
     dispatch(getCountryxSearch(nameFiltered)); // -> llena "countryDetail" del estado global
-    setName(""); // -> borro el estado luego al disparar la busqueda
+    document.getElementById("filterCont").selectedIndex = 0;
+    updateFilter(); // -> RESETEO LOS 4 FILTROS
+    // setName(""); // -> borro el estado luego al disparar la busqueda
+  }
+
+  //RECARGO PAISES con RELOAD
+  function handleClick() {
+    console.log("RECARGO PAISES con RELOAD");
+    document.getElementById("filterCont").selectedIndex = 0;
+    updateFilter(); // -> RESETEO LOS 4 FILTROS
+    setName(""); // -> borro el estado del SEARCH
+    dispatch(getAllCountries());
   }
 
   // FILTRO POR CONTINENTE
   function handleFilterxContinent(e) {
     setCurrentPage(1);
     console.log("FILTRO CONTINENTE DESDE HOME");
-    updateFilter();
     dispatch(getCountriesxFilter(e.target.value)); // -> llena "countryDetail" del estado global
+    updateFilter(); // -> RESETEO 3 FILTROS excepto CONT
+    // ordering(switcher); // -> MANTENGO EL ULTIMO FILTRO???
   }
 
   // FILTRO POR ACTIVIDAD
   function handlexActivity(e) {
-    // dispatch(countryByActivity(e.target.value));
-    // setCurrentPage(1);
+    if (totalCountries.filter((el) => el.activities.length > 0).length > 0) {
+      // if (filteredActivity) {
+      //   dispatch(getAllCountries()); // -> traigo todos los países para no filtrar sobre lo filtrado
+      //   // setFilteredActivity(false); // -> invierto el switch
+      // }
+      let countriesFiltered = [];
+      // OPCION 1
+      // totalCountries.forEach((el) => {
+      //   if (e.activities.length > 0 &&
+      //     el.activities.find((a) => a.id === e.target.value))
+      //     countriesFiltered.push(el); });
+      // OPCION 2
+      countriesFiltered = totalCountries.filter((c) =>
+        c.activities.find((a) => a.id === e.target.value)
+      );
+
+      if (countriesFiltered.length > 0) {
+        // setFilteredActivity(true);
+        setCurrentPage(1);
+        dispatch(updateCountries(countriesFiltered));
+      } else return alert("There is no countries with that activity");
+    } else return alert("There is no countries with that activity");
   }
   //reseteo ambos filtros
   function updateFilter() {
@@ -132,13 +166,14 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div className="base2">
+      {/* <NavBar /> */}
       <div className="consola">
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             className="input"
-            placeholder="Write a country to search..."
+            placeholder="Search a country..."
             value={nameFiltered}
             onChange={handleInputChange}
           />
@@ -146,10 +181,10 @@ export default function Home() {
         </form>
         <span>
           <select
-            className="filter"
+            className="filterHome"
             id="filterAZ"
             onChange={(e) => {
-              ordering(e);
+              ordering(e.target.value);
             }}
           >
             <option value="1" hidden>
@@ -161,10 +196,10 @@ export default function Home() {
         </span>
         <span>
           <select
-            className="filter"
+            className="filterHome"
             id="filterPop"
             onChange={(e) => {
-              ordering(e);
+              ordering(e.target.value);
             }}
           >
             <option value="0" hidden>
@@ -176,12 +211,15 @@ export default function Home() {
         </span>
         <span>
           <select
-            className="filter"
+            id="filterCont"
+            className="filterHome"
             onChange={(e) => {
               handleFilterxContinent(e);
             }}
           >
-            <option hidden>Filer by Continent...</option>
+            <option value="" hidden>
+              Filer by Continent...
+            </option>
             <option value="Africa">Africa</option>
             <option value="America">America</option>
             <option value="Antarctic">Antarctic</option>
@@ -193,7 +231,7 @@ export default function Home() {
         <span>
           <select
             id="filterAct"
-            className="filter"
+            className="filterHome"
             onChange={(e) => handlexActivity(e)}
           >
             <option value="0" hidden>
@@ -201,44 +239,51 @@ export default function Home() {
             </option>
             {totalActivities?.map((curr) => {
               return (
-                <option key={curr.id} id={curr.id}>
+                <option key={curr.id} value={curr.id}>
                   {curr.name}
                 </option>
               );
             })}
           </select>
         </span>
+        <span>
+          <button className="button" onClick={handleClick}>
+            RELOAD Countries
+          </button>
+        </span>
       </div>
       <div className="paginatorSpace">
         <div className="paginatorContainer">
-          <button
-            disabled={currentPage === 1 ? true : false}
-            onClick={() => {
-              paginate(currentPage - 1);
-            }}
-          >
-            <span id="pag">PREV</span>
-          </button>
-          <Pages
-            countriesPerPage={countriesPerPage}
-            totalCountries={totalCountries.length}
-            paginate={paginate}
-            currentPage={currentPage}
-          />
-          <button
-            disabled={
-              currentPage ===
-              1 + Math.ceil((totalCountries.length - 9) / countriesPerPage)
-                ? true
-                : false
-            }
-            display="none" //visibility={if(currentPage ===Math.ceil(totalCountries.length / countriesPerPage)) "hidden "}
-            onClick={() => {
-              paginate(currentPage + 1);
-            }}
-          >
-            <span id="pag">NEXT</span>
-          </button>
+          <div className="paginatorBorder">
+            <button
+              disabled={currentPage === 1 ? true : false}
+              onClick={() => {
+                paginate(currentPage - 1);
+              }}
+            >
+              <span id="pagPrevNext">PREV</span>
+            </button>
+            <Pages
+              countriesPerPage={countriesPerPage}
+              totalCountries={totalCountries.length}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+            <button
+              disabled={
+                currentPage ===
+                1 + Math.ceil((totalCountries.length - 9) / countriesPerPage)
+                  ? true
+                  : false
+              }
+              display="none" //visibility={if(currentPage ===Math.ceil(totalCountries.length / countriesPerPage)) "hidden "}
+              onClick={() => {
+                paginate(currentPage + 1);
+              }}
+            >
+              <span id="pagPrevNext">NEXT</span>
+            </button>
+          </div>
         </div>
       </div>
       <div className="countrySpace">
@@ -256,6 +301,6 @@ export default function Home() {
           })}
         </span>
       </div>
-    </>
+    </div>
   );
 }

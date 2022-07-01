@@ -29,6 +29,7 @@ const getCountries = async (req, res) => {
         },
       },
       // order: [["name", "ASC"]],
+      include: Activity,
     });
     if (response.length === 0) {
       return res
@@ -52,6 +53,7 @@ const getCountries = async (req, res) => {
           },
         ],
       },
+      include: Activity,
       // order: [["name", "ASC"]],
     });
     if (response.length === 0) {

@@ -8,7 +8,7 @@ import Home from "../Home/Home";
 import CountryDetail from "../Country/CountryDetail";
 import About from "../About/About";
 import CreateActivity from "../Activity/CreateActivity";
-import "../../styles/Card.module.css";
+import "../../styles/Previous.css";
 
 // acciones a usar:
 // import { getAllCountries, getAllActivities } from "../../redux/actions";
@@ -25,18 +25,10 @@ export default class Previous extends Component {
     return (
       <div>
         <div className="base">
+          <br />
           <NavBar />
           <Routes>
-            <Route
-              exact
-              path="/home"
-              element={
-                <Home
-                // countries={this.props.countries}
-                // activities={this.props.activities}
-                />
-              }
-            />
+            <Route exact path="/home" element={<Home />} />
             <Route path="/home/:id" element={<CountryDetail />} />
             <Route path="/activities" element={<CreateActivity />} />
             <Route path="/about" element={<About />} />;

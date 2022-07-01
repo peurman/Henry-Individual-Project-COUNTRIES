@@ -1,7 +1,7 @@
 .country {
   text-align: center;
-  width: 210px;
-  height: 240px;
+  width: 230px;
+  height: 260px;
   padding: 10px;
   margin: 10px;
   color: rgb(255, 255, 255);
@@ -31,21 +31,42 @@
 .flag {
   align-self: center;
   border-radius: 15px;
+  margin-top: 10px;
 }
 .countryLink {
   text-decoration: none; /* saco el subrayado del link */
 }
-
-.countrydetail span {
+#nameCountry {
   color: rgb(253, 253, 251);
-  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  font-size: 18px;
+  font-weight: bold;
   text-decoration: none;
+  width: 100%;
+  margin-bottom: 0px;
 }
-.countrydetail span:hover {
+#nameCountry:hover {
   color: rgb(250, 250, 7);
 }
 
-.countrydetail p {
+#titleContinent {
   color: rgb(166, 166, 165);
   font-size: 15px;
+  text-decoration-line: underline;
+}
+#nameContinent {
+  color: silver;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  margin: 0px;
+}
+.containerCont {
+  background-color: none;
+  margin: 0px;
 }

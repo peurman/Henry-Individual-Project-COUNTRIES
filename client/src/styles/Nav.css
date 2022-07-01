@@ -4,10 +4,11 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
-  margin: 10px 20px 0px 20px;
-  padding: 10px;
-  background: rgb(72, 70, 107);
+  margin: -12px 20px 0px 20px;
+  padding: 5px;
+  background: rgba(69, 77, 81, 0.899);
   border-radius: 20px;
+  backdrop-filter: blur(1px);
 }
 
 .menu {

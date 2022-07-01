@@ -10,15 +10,17 @@ const getActivities = async (req, res) => {
 
 //POST ACTIVITY
 const postActivity = async (req, res, next) => {
-  const { name, difficulty, duration, season, countryId } = req.body;
-  if (!name || !difficulty || !duration || !season || countryId.length === 0)
+  const { name, duration, difficulty, season, countryId } = req.body;
+  if (!name || !duration || !difficulty || !season || countryId.length === 0) {
+    console.log("Falta enviar datos obligatorios");
     return res.status(404).send("Falta enviar datos obligatorios");
+  }
   try {
     const [activity, created] = await Activity.findOrCreate({
       where: {
         name,
-        difficulty,
         duration,
+        difficulty,
         season,
       },
     });
@@ -29,6 +31,7 @@ const postActivity = async (req, res, next) => {
 
     return res.json(activity);
   } catch (error) {
+    console.log("Error en alguno de los datos provistos");
     return res.status(404).send("Error en alguno de los datos provistos");
   }
 };

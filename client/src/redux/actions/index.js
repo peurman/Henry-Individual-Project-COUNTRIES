@@ -6,6 +6,7 @@ export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const GET_ALL_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export const EMPTY_STATE = "EMPTY_STATE";
 export const UPDATE_COUNTRIES = "UPDATE_COUNTRIES";
+// export const COUNTRY_BY_ACTIVITY = "COUNTRY_BY_ACTIVITY"; // -> lo hago en Home
 // export const DELETE_ACTIVITY = "DELETE_ACTIVITY"; // NO PEDIDA
 
 const axios = require("axios"); // también uso fetch
@@ -110,6 +111,7 @@ export const createActivity = (values) => {
   };
 };
 
+// GET ALL ACTIVITIES
 export const getAllActivities = () => async (dispatch) => {
   const response = await axios.get("http://localhost:3001/activities");
   dispatch({
@@ -118,18 +120,28 @@ export const getAllActivities = () => async (dispatch) => {
   });
 };
 
+// EMPTY STATE (en el FRONT)
 export const emptyState = () => (dispatch) => {
   dispatch({
     type: EMPTY_STATE,
   });
 };
 
+// UPDATE COUNTRIES (en el FRONT)
 export const updateCountries = (value) => (dispatch) => {
   dispatch({
     type: UPDATE_COUNTRIES,
     payload: value,
   });
 };
+
+// COUNTRY BY ACTIVITY (en el FRONT) - la hago en componente HOME
+// export const countryByActivity = (value) => (dispatch) => {
+//   dispatch({
+//     type: COUNTRY_BY_ACTIVITY,
+//     payload: value,
+//   });
+// };
 
 // ↓↓↓↓↓↓↓↓NO PEDIDA↓↓↓↓↓↓↓↓
 // export const deleteActivity = (id) => {

@@ -13,6 +13,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false, // no lo pide
     },
+    duration: {
+      type: DataTypes.INTEGER,
+    },
     difficulty: {
       type: DataTypes.INTEGER,
       validate: {
@@ -20,9 +23,6 @@ module.exports = (sequelize) => {
         max: 5,
       },
       allowNull: false, // no lo pide
-    },
-    duration: {
-      type: DataTypes.INTEGER,
     },
     season: {
       type: DataTypes.ENUM(
