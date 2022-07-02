@@ -18,15 +18,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .active {
   background-color: #00ccffe5;
-  padding: 0px 3px;
+  padding: 5px;
   align-self: center;
-  border-radius: 5px;
+  border-radius: 10px;
   color: whitesmoke;
-  border: 1px solid silver;
+  /* border: 1px solid silver; */
 }
 
 #pag {

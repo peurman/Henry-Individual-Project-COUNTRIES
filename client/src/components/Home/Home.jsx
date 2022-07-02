@@ -9,13 +9,15 @@ import {
   getCountriesxFilter,
   getAllActivities,
   updateCountries,
+  emptyError,
   // countryByActivity,
 } from "../../redux/actions";
 
 // Componentes a usar:
 import Card from "../Card/Card";
 import Pages from "../Pages/Pages";
-import NavBar from "../NavBar/NavBar";
+import { Message } from "../Message/Message";
+
 // estilos:
 import "../../styles/Home.css";
 
@@ -25,12 +27,16 @@ export default function Home() {
   const dispatch = useDispatch();
   const totalCountries = useSelector((state) => state.countries); // -> uso estado GLOBAL para traer los paises
   const totalActivities = useSelector((state) => state.activities); // -> uso estado GLOBAL para traer las actividades
+  const errorDetected = useSelector((state) => state.error);
+
   // LOCAL
   const [currentPage, setCurrentPage] = useState(1); // -> para el paginado, arranco en 1
   const [countriesPerPage] = useState(10); // -> para el paginado, defino 10 x pag o el NRO que quiera
 
   const [switcher, setSwitcher] = useState("all"); // -> para el ordenamiento
   const [nameFiltered, setName] = useState(""); // -> para el filtrado x NOMBRE
+  const [successMsg, setSuccessMsg] = React.useState("none"); // -> para POPUP de ERRORES
+
   // const [filteredActivity, setFilteredActivity] = useState(false);
 
   //PAGINADO
@@ -55,6 +61,9 @@ export default function Home() {
 
   // Metodo para ORDENAR >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> NO FUNCIONA!!!!
   function ordering(val) {
+    let eliminoWarning = switcher; // -> para sacar el WARNING de la consola
+    if (eliminoWarning) {
+    }
     if (val === "AZ") {
       totalCountries.sort(function (a, b) {
         if (a.name > b.name) {
@@ -95,8 +104,11 @@ export default function Home() {
     console.log("ORDENO PAISES DESDE HOME");
     dispatch(updateCountries(totalCountries)); // -> actualiza estado global "countries"
   }
-  // DETECTAR CAMBIOS
-  // useEffect(() => {}, [switcher, countryList]); // -> NO FUNCIONA!!!
+  // DETECTAR ERROR en el SEARCH
+  useEffect(() => {
+    if (errorDetected) setSuccessMsg("searchWithoutCount"); // -> mando POP UP de Error
+    dispatch(emptyError()); // -> pongo en cero el error
+  }, [errorDetected]);
 
   // FILTRO POR NOMBRE
   function handleInputChange(e) {
@@ -104,14 +116,18 @@ export default function Home() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    if (!nameFiltered) {
-      alert("You have to write something to do the search");
+    //chequeo si es valido el dato a buscar
+    if (nameFiltered.length === 0 || /\s/g.test(nameFiltered)) {
+      return setSuccessMsg("searchWithoutLetters"); // alert("You have to write something to do the search");
+    } else if (!/^[a-zA-Z&]+$/.test(nameFiltered)) {
+      return setSuccessMsg("searchWithSpecChar"); // alert("No special characters allowed");
     }
     setCurrentPage(1);
     console.log("FILTRO PAISES DESDE HOME");
-    dispatch(getCountryxSearch(nameFiltered)); // -> llena "countryDetail" del estado global
-    document.getElementById("filterCont").selectedIndex = 0;
-    updateFilter(); // -> RESETEO LOS 4 FILTROS
+    dispatch(getCountryxSearch(nameFiltered)); // -> traigo todos los paises encontrados
+
+    document.getElementById("filterCont").selectedIndex = 0; // -> Reseteo el de Continente
+    updateFilter(); // -> Reseteo los 3 FILTROS
     // setName(""); // -> borro el estado luego al disparar la busqueda
   }
 
@@ -155,8 +171,12 @@ export default function Home() {
         // setFilteredActivity(true);
         setCurrentPage(1);
         dispatch(updateCountries(countriesFiltered));
-      } else return alert("There is no countries with that activity");
-    } else return alert("There is no countries with that activity");
+      } else setSuccessMsg("activityNotFound");
+      //  return alert("This activity is not found in the actual selection of countries");
+    } else setSuccessMsg("countriesWithoutAct");
+    // return alert(
+    //   "The countries currently selected do not have any activities"
+    // );
   }
   //reseteo ambos filtros
   function updateFilter() {
@@ -166,7 +186,7 @@ export default function Home() {
   }
 
   return (
-    <div className="base2">
+    <div className="wallpaperHome">
       {/* <NavBar /> */}
       <div className="consola">
         <form onSubmit={handleSubmit}>
@@ -301,6 +321,10 @@ export default function Home() {
           })}
         </span>
       </div>
+      <Message // -> Renderizo Comp Message mandando "true"
+        onClose={() => setSuccessMsg("none")}
+        show={successMsg}
+      />
     </div>
   );
 }

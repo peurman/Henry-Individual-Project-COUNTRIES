@@ -7,25 +7,30 @@
   color: rgb(255, 255, 255);
   box-shadow: -2px 4px 4px 0 rgba(24, 13, 1, 0.633);
   transition: 0.3s;
-  background-color: rgba(66, 44, 18, 0.489);
+  background-color: #2e4a7fb1;
   border-radius: 15px;
   filter: opacity(70%);
   transition: 0.3s;
 }
-
+.countrydetail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .country:hover {
   filter: none;
   transition: 0.3s;
 }
 .country img {
-  width: 95%;
+  width: 92%;
   height: 150px;
-  transition: 0.3s;
+  transition: 0.7s;
 }
 .country img:hover {
-  width: 100%;
+  width: 98%;
   height: 150px;
-  transition: 0.3s;
+  transition: 0.7s;
 }
 
 .flag {
@@ -47,9 +52,11 @@
   text-decoration: none;
   width: 100%;
   margin-bottom: 0px;
+  transition: 0.5s;
 }
 #nameCountry:hover {
-  color: rgb(250, 250, 7);
+  color: #00ccffe5;
+  transition: 0.5s;
 }
 
 #titleContinent {

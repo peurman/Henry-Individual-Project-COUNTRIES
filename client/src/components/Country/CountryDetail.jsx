@@ -26,56 +26,72 @@ const CountryDetail = (props) => {
             <div className="containerE1">
               <span id="countryTitle">{upperName}</span>
             </div>
-            <hr />
-            <div>
-              <img className="flag" alt="img" src={`${countryDet.flag}`} />
-            </div>
-            <div className="containerCharact">
-              <div className="containerCharactFirst">
-                <p>Code:</p>
-                <p>{countryDet.id}</p>
+            <div className="containerF1">
+              <div>
+                <img className="flag" alt="img" src={`${countryDet.flag}`} />
               </div>
-              <div className="containerCharactCenter">
-                <p>Capital:</p>
-                <p>{countryDet.capital}</p>
-              </div>
-              <div className="containerCharactCenter">
-                <p>Location:</p>
-                <p>{countryDet.subregion}</p>
-              </div>
-              <div className="containerCharactCenter">
-                <p>Continent:</p>
-                <p>{countryDet.continent}</p>
-              </div>
-              <div className="containerCharactCenter">
-                <p>Area:</p>
-                <p>{countryDet.area} km2</p>
-              </div>
-              <div className="containerCharactLast">
-                <p>Population:</p>
-                <p>{countryDet.population} habitants</p>
+              <div className="containerCharact">
+                <div className="containerCharactFirst">
+                  <p>Code:</p>
+                  <p>{countryDet.id}</p>
+                </div>
+                <div className="containerCharactCenter">
+                  <p>Capital:</p>
+                  <p>{countryDet.capital}</p>
+                </div>
+                <div className="containerCharactCenter">
+                  <p>Location:</p>
+                  <p>{countryDet.subregion}</p>
+                </div>
+                <div className="containerCharactCenter">
+                  <p>Continent:</p>
+                  <p>{countryDet.continent}</p>
+                </div>
+                <div className="containerCharactCenter">
+                  <p>Area:</p>
+                  <p>{new Intl.NumberFormat().format(countryDet.area)} km2</p>
+                </div>
+                <div className="containerCharactLast">
+                  <p>Population:</p>
+                  <p>
+                    {new Intl.NumberFormat().format(countryDet.population)}{" "}
+                    habitants
+                  </p>
+                </div>
               </div>
             </div>
             <div className="containerActA1">
               <div className="containerActB1">
-                <p id="activityTitle">Activities</p>
-                <span className="refLevels">
-                  (Difficulty levels: 1- very easy / 2-easy / 3-medium /
-                  4-difficult / 5-very difficult)
-                </span>
-                <hr />
+                <div className="containerActC1">
+                  <p id="activityTitle">Activities</p>
+                  <span className="refLevels">
+                    (Difficulty levels: 1- very easy / 2-easy / 3-medium /
+                    4-difficult / 5-very difficult)
+                  </span>
+                </div>
                 <div className="containerListAct">
                   {countryDet.activities?.length > 0 ? (
                     countryDet.activities.map((a) => (
                       <div className="containerListActEach" key={a.id}>
-                        <p id="activityName">{a.name}</p>
-                        <p>Duration: {a.duration} hs</p>
-                        <p>Difficulty: {a.difficulty} </p>
-                        <p>Season: {a.season} </p>
+                        <p id="activityName">{a.name.toUpperCase()}</p>
+                        <div className="containerActivity">
+                          <div className="containerActivityFirst">
+                            <p>Duration:</p>
+                            <p>{a.duration} hs</p>
+                          </div>
+                          <div className="containerActivityCenter">
+                            <p>Difficulty:</p>
+                            <p>{a.difficulty}</p>
+                          </div>
+                          <div className="containerActivityLast">
+                            <p>Season:</p>
+                            <p>{a.season}</p>
+                          </div>
+                        </div>
                       </div>
                     ))
                   ) : (
-                    <p>No activites were created </p>
+                    <p className="noActivities">No activites were created </p>
                   )}
                 </div>
               </div>

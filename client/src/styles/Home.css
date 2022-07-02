@@ -1,4 +1,4 @@
-.base2 {
+.wallpaperHome {
   background-image: url("../assests/LandingA.jpg");
   background-size: 100%; /* contain, cover,auto;*/
   background-position: 100%;
@@ -12,12 +12,12 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
   margin: 0px 20px 0px 20px;
   width: 100%;
   background: rgba(69, 77, 81, 0.899);
-  height: 100vh;
+  /* height: 120vh; */
   border-radius: 0 0 20px 20px;
   backdrop-filter: blur(1px);
   /* background: linear-gradient(
@@ -66,22 +66,25 @@
   padding-left: 7px;
   padding-right: 7px;
   padding-top: 0%;
+  margin-right: 10px;
+  margin-left: 10px;
   width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* backdrop-filter: blur(1px); */
+  flex-wrap: wrap;
 }
 
 #pagPrevNext {
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  flex-wrap: wrap;
   border-radius: 5px;
   border: 1px solid silver;
   padding: 5px;
   background-color: #00ccffe5;
+  cursor: pointer;
   transition: 0.5s;
 }
 

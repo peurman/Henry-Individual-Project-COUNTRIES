@@ -8,6 +8,8 @@ import {
   GET_ALL_ACTIVITIES,
   EMPTY_STATE,
   UPDATE_COUNTRIES,
+  ERROR_RECEIVED,
+  EMPTY_ERROR,
   // COUNTRY_BY_ACTIVITY, // -> lo hago en Home
   // DELETE_ACTIVITY, // NO PEDIDA
 } from "../actions";
@@ -17,6 +19,7 @@ const initialState = {
   countryDetail: {},
   activityDetail: {},
   activities: [],
+  error: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -61,6 +64,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload, // todos los paises ordenados
+      };
+    case ERROR_RECEIVED:
+      return {
+        ...state,
+        error: 1, // todos los paises ordenados
+      };
+    case EMPTY_ERROR:
+      return {
+        ...state,
+        error: 0, // todos los paises ordenados
       };
     // case COUNTRY_BY_ACTIVITY: // -> lo hago en componente HOME
     //   const allcountries = state.countries;

@@ -31,10 +31,12 @@
   padding: 20px;
   width: 50%;
 }
-.containerTitle {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.containerTitleA {
+  border-bottom: 2px solid white;
+  padding-bottom: 7px;
+  margin-bottom: 5px;
+  border-color: silver;
+  border-bottom-style: groove;
 }
 .containerCreateA {
   display: flex;
@@ -196,7 +198,6 @@
   font-size: 17px;
   border-radius: 10px;
   border: 1px solid #929191;
-  margin: 2px;
   padding: 10px;
   cursor: pointer;
   transition: 0.7s;
@@ -205,5 +206,4 @@
   background-color: #2e4a7fda;
   color: #00ccffe5;
   border: 1px solid #929191;
-  margin: 0px;
 }

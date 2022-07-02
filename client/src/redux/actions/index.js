@@ -6,6 +6,9 @@ export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const GET_ALL_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export const EMPTY_STATE = "EMPTY_STATE";
 export const UPDATE_COUNTRIES = "UPDATE_COUNTRIES";
+export const ERROR_RECEIVED = "ERROR_RECEIVED";
+export const EMPTY_ERROR = "EMPTY_ERROR";
+
 // export const COUNTRY_BY_ACTIVITY = "COUNTRY_BY_ACTIVITY"; // -> lo hago en Home
 // export const DELETE_ACTIVITY = "DELETE_ACTIVITY"; // NO PEDIDA
 
@@ -68,11 +71,14 @@ export function getCountryxSearch(name) {
       );
       dispatch({
         type: GET_COUNTRY_BY_SEARCH,
-        payload: response.data, // -> trae objeto con ese país
+        payload: response.data, // -> trae paises que matchean con la busqueda
       });
     } catch (error) {
-      console.log(error);
-      alert("No se encontraron países");
+      // console.log(error);
+      // alert("No countries were found with the selected search");
+      dispatch({
+        type: ERROR_RECEIVED, // -> cambio el flag de la prop "error"
+      });
     }
   };
 }
@@ -90,7 +96,7 @@ export function getCountriesxFilter(filter) {
       });
     } catch (error) {
       console.log(error);
-      alert("No se encontraron países");
+      // alert("No se encontraron países");
     }
   };
 }
@@ -132,6 +138,13 @@ export const updateCountries = (value) => (dispatch) => {
   dispatch({
     type: UPDATE_COUNTRIES,
     payload: value,
+  });
+};
+
+// EMPTY ERROR (en el FRONT)
+export const emptyError = () => (dispatch) => {
+  dispatch({
+    type: EMPTY_ERROR,
   });
 };
 

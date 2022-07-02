@@ -1,4 +1,4 @@
-.nav {
+.searchBar {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,7 +11,7 @@
   backdrop-filter: blur(1px);
 }
 
-.menu {
+.menuSearchBar {
   color: white;
   text-decoration: none;
   cursor: pointer;

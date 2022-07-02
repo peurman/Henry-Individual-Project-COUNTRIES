@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/Card.css";
+import "../../styles/Card.css";
 import { NavLink } from "react-router-dom";
 
 // Modelo de CARD de cada pais, con LINK al respect país

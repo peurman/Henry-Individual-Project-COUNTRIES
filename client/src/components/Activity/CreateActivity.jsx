@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllCountries, createActivity } from "../../redux/actions";
 import "../../styles/CreateActivity.css";
+// importo Message para el Pop-Up
+import { Message } from "../Message/Message";
 
 // componente CREATE ACTIVITY
 export default function CreateActivity() {
@@ -12,7 +14,8 @@ export default function CreateActivity() {
 
   const [errors, setErrors] = React.useState({}); // -> uso estado LOCAL para almacenar errores
   const [countriesSelected, setCountriesSelected] = React.useState([]);
-  const [switcher, setSwitcher] = React.useState(""); // -> para la validación
+  // const [switcher, setSwitcher] = React.useState(""); // -> para la validación
+  const [successMsg, setSuccessMsg] = React.useState("none"); // -> para POPUP de ACTIVIDAD CREADA
 
   // estado LOCAL con todo el FORMULARIO
   let [myForm, setMyForm] = React.useState({
@@ -128,16 +131,17 @@ export default function CreateActivity() {
   // SUBMIT > solicito el POST!!
   let handleSubmit = (e) => {
     e.preventDefault(); // -> al querer salir  aviso x info cargada
-    dispatch(createActivity(myForm)); /// -> con el submit hago el post
-    updateFilters();
-    setCountriesSelected([]);
+    dispatch(createActivity(myForm)); // -> hago el POST
+    updateFilters(); // -> limpio filtros
+    setCountriesSelected([]); // -> vacía listado
     setMyForm({
       name: "",
       duration: "",
       difficulty: "",
       season: "",
       countryId: [],
-    });
+    }); // -> limpio formulario
+    setSuccessMsg("createAct");
   };
 
   //reseteo ambos filtros
@@ -155,7 +159,7 @@ export default function CreateActivity() {
         <div className="containerB2">
           <div className="containerC2">
             <div className="containerTitleA">
-              <span id="createTitle">CREATE ACTIVITY</span> <hr />
+              <span id="createTitle">CREATE ACTIVITY</span>
             </div>
             <div className="containerCreateA">
               <div className="containerCreateB">
@@ -168,7 +172,7 @@ export default function CreateActivity() {
                       type="text"
                       placeholder="Please write a name..."
                       onChange={(e) => {
-                        setSwitcher("nameActivity");
+                        // setSwitcher("nameActivity");
                         handleChange(e);
                       }}
                       value={myForm.name}
@@ -189,7 +193,7 @@ export default function CreateActivity() {
                       type="text"
                       placeholder="Please write a number..."
                       onChange={(e) => {
-                        setSwitcher("durActivity");
+                        // setSwitcher("durActivity");
                         handleChange(e);
                       }}
                       value={myForm.duration}
@@ -208,7 +212,7 @@ export default function CreateActivity() {
                       id="difficulty"
                       className={!errors.difficulty ? "filter" : "dangerFilter"}
                       onChange={(e) => {
-                        setSwitcher("difficulty");
+                        // setSwitcher("difficulty");
                         handleChange(e);
                       }}
                     >
@@ -234,7 +238,7 @@ export default function CreateActivity() {
                       id="season"
                       name="season"
                       onChange={(e) => {
-                        setSwitcher("season");
+                        // setSwitcher("season");
                         handleChange(e);
                       }}
                     >
@@ -260,7 +264,7 @@ export default function CreateActivity() {
                       id="countries"
                       name="country"
                       onChange={(e) => {
-                        setSwitcher("countries");
+                        // setSwitcher("countries");
                         handleChangeCountry(e);
                       }}
                     >
@@ -322,6 +326,10 @@ export default function CreateActivity() {
                       >
                         Create Activity
                       </button>
+                      <Message // -> Renderizo Comp Message mandando "true"
+                        onClose={() => setSuccessMsg("none")}
+                        show={successMsg}
+                      />
                     </div>
                   </div>
                 </form>
