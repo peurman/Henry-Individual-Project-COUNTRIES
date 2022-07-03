@@ -20,8 +20,34 @@ const getCountryxID = async (req, res, next) => {
 //GET COUNTRIES
 const getCountries = async (req, res) => {
   const { name } = req.query; // -> si llega nombre de pais x query
-  const { filter } = req.query; // -> si llega filtro
-  if (name) {
+  const { continent } = req.query; // -> si llega filtro
+  if (continent && name) {
+    const response = await Country.findAll({
+      where: {
+        [Op.and]: [
+          {
+            continent: {
+              [Op.iLike]: "%" + continent + "%", // -> si contiene continent
+            },
+          },
+          {
+            name: {
+              [Op.iLike]: "%" + name + "%", // -> si contiene name
+            },
+          },
+        ],
+      },
+      include: Activity,
+    });
+    if (response.length === 0) {
+      return res
+        .status(404)
+        .send(
+          `There are not countries with the search "${name}" in ${continent} continent`
+        );
+    }
+    res.status(201).json(response);
+  } else if (name) {
     const response = await Country.findAll({
       where: {
         name: {
@@ -37,18 +63,18 @@ const getCountries = async (req, res) => {
         .send(`Name ${name} does not correspond to any existing country`);
     }
     res.status(201).json(response);
-  } else if (filter) {
+  } else if (continent) {
     const response = await Country.findAll({
       where: {
         [Op.or]: [
           // {
           //   subregion: {
-          //     [Op.iLike]: "%" + filter + "%", // -> si contiene filter
+          //     [Op.iLike]: "%" + continent + "%", // -> si contiene continent
           //   },
           // },
           {
             continent: {
-              [Op.iLike]: "%" + filter + "%", // -> si contiene filter
+              [Op.iLike]: "%" + continent + "%", // -> si contiene continent
             },
           },
         ],

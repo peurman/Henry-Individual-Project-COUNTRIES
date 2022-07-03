@@ -6,7 +6,8 @@ export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
 export const GET_ALL_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export const EMPTY_STATE = "EMPTY_STATE";
 export const UPDATE_COUNTRIES = "UPDATE_COUNTRIES";
-export const ERROR_RECEIVED = "ERROR_RECEIVED";
+export const ERROR_RECEIVED_1 = "ERROR_RECEIVED_1";
+export const ERROR_RECEIVED_2 = "ERROR_RECEIVED_2";
 export const EMPTY_ERROR = "EMPTY_ERROR";
 
 // export const COUNTRY_BY_ACTIVITY = "COUNTRY_BY_ACTIVITY"; // -> lo hago en Home
@@ -77,18 +78,18 @@ export function getCountryxSearch(name) {
       // console.log(error);
       // alert("No countries were found with the selected search");
       dispatch({
-        type: ERROR_RECEIVED, // -> cambio el flag de la prop "error"
+        type: ERROR_RECEIVED_1, // -> cambio el flag de la prop "error"
       });
     }
   };
 }
 
 // GET_COUNTRIES_BY_FILTER
-export function getCountriesxFilter(filter) {
+export function getCountriesxFilter(continent, name) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/countries?filter=${filter}`
+        `http://localhost:3001/countries?continent=${continent}&name=${name}`
       );
       dispatch({
         type: GET_COUNTRIES_BY_FILTER,
@@ -96,6 +97,9 @@ export function getCountriesxFilter(filter) {
       });
     } catch (error) {
       console.log(error);
+      dispatch({
+        type: ERROR_RECEIVED_2, // -> cambio el flag de la prop "error"
+      });
       // alert("No se encontraron países");
     }
   };

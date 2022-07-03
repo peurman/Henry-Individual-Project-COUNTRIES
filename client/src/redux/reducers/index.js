@@ -8,7 +8,8 @@ import {
   GET_ALL_ACTIVITIES,
   EMPTY_STATE,
   UPDATE_COUNTRIES,
-  ERROR_RECEIVED,
+  ERROR_RECEIVED_1,
+  ERROR_RECEIVED_2,
   EMPTY_ERROR,
   // COUNTRY_BY_ACTIVITY, // -> lo hago en Home
   // DELETE_ACTIVITY, // NO PEDIDA
@@ -16,6 +17,7 @@ import {
 
 const initialState = {
   countries: [],
+  countriesBackUp: [],
   countryDetail: {},
   activityDetail: {},
   activities: [],
@@ -28,6 +30,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload, //solo actualizo esta prop
+        countriesBackUp: action.payload, // hago backup para seguir trabajando con essos paises
       };
     case GET_COUNTRY_DETAIL:
       return {
@@ -38,6 +41,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload, // todos los paises que salgan por busqueda
+        countriesBackUp: action.payload, // hago backup para seguir trabajando con essos paises
       };
     case GET_COUNTRIES_BY_FILTER:
       return {
@@ -65,10 +69,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         countries: action.payload, // todos los paises ordenados
       };
-    case ERROR_RECEIVED:
+    case ERROR_RECEIVED_1:
       return {
         ...state,
         error: 1, // todos los paises ordenados
+      };
+    case ERROR_RECEIVED_2:
+      return {
+        ...state,
+        error: 2, // todos los paises ordenados
       };
     case EMPTY_ERROR:
       return {

@@ -13,16 +13,10 @@
 .landing {
   color: white;
   width: 80%;
-  background: rgba(39, 43, 48, 0.525);
-  /* background: linear-gradient(
-    90deg,
-    rgba(20, 20, 20, 0) 0%,
-    rgba(0, 0, 0, 0.7) 38%,
-    rgba(0, 0, 0, 0.7) 64%,
-    rgba(51, 59, 71, 0) 100%
-  ); */
+  -webkit-box-shadow: inset 8px 5px 120px 39px rgba (0, 0, 0, 0.12);
+  box-shadow: inset 8px 5px 120px 39px rgba(0, 0, 0, 0.12);
   padding: 30px;
-  border-radius: 20px;
+  border-radius: 50px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -32,8 +26,9 @@
 .landing h1 {
   font-size: 50px;
   color: #00ccffe5;
+  opacity: 0.9;
   font-family: Verdana, Arial;
-  /* text-shadow: 0px 0px 0 #000000, 0px 5px 15px #000000; */
+  text-shadow: 0px 0px 26px 5px rgba(4, 67, 103, 0.7);
   margin: 0%;
 }
 
@@ -48,16 +43,18 @@
   padding: 10px;
   cursor: pointer;
   transition: 0.9s;
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0px 0px 26px 5px rgba(4, 67, 103, 0.46);
+  box-shadow: 0px 0px 26px 5px rgba(4, 67, 103, 0.46);
+  transition: 0.9s;
 }
 
 .buttonGo:hover {
   background-color: #00ccffe5;
   color: #2e4a7fda;
   border: solid 1px #43415e;
-  margin: 23px;
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  font-size: 45px;
+  font-weight: bold;
+  transition: 0.9s;
 }
 
 .text {
