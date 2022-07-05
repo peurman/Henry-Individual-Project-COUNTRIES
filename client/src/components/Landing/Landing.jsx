@@ -7,7 +7,7 @@ const Landing = () => {
   return (
     <div className="wallpaper">
       <div className="landing">
-        <h1>WELCOME TO COUNTRIES WEB!</h1>
+        <h1>WELCOME TO COUNTRIES WEB</h1>
         <p className="text">
           ... please click the button 'GO' to enter ...
           <br />

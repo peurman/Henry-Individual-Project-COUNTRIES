@@ -1,6 +1,6 @@
 import "../../styles/Message.css";
 
-export function Message({ show, onClose }) {
+export default function Message({ show, onClose }) {
   if (show === "none") return null; // -> si es FALSO NO HACE NADA
 
   return (

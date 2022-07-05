@@ -4,7 +4,7 @@ import {
   GET_COUNTRY_DETAIL,
   GET_COUNTRY_BY_SEARCH,
   GET_COUNTRIES_BY_FILTER,
-  CREATE_ACTIVITY,
+  POST_NEW_ACTIVITY,
   GET_ALL_ACTIVITIES,
   EMPTY_STATE,
   UPDATE_COUNTRIES,
@@ -47,8 +47,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload, // todos los paises que salgan por busqueda
+        countriesBackUp: action.payload, // hago backup para seguir trabajando con essos paises
       };
-    case CREATE_ACTIVITY:
+    case POST_NEW_ACTIVITY:
       return {
         ...state,
         activityDetail: action.payload, //solo actualizo esta prop

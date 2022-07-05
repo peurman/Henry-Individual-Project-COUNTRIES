@@ -25,11 +25,23 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  background: rgba(69, 77, 81, 0.899);
+  /* background: rgba(69, 77, 81, 0.899); */
+  background: linear-gradient(
+    90deg,
+    rgba(25, 25, 25, 0.9) 0%,
+    rgba(111, 113, 124, 0.9) 20%,
+    rgba(111, 113, 124, 0.9) 80%,
+    rgba(25, 25, 25, 0.9) 100%
+  );
   border-radius: 20px;
   margin: 20px;
   padding: 20px;
+  padding-top: 10px;
   width: 50%;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 17px;
+  font-weight: none;
+  letter-spacing: 0.7px;
 }
 .containerTitleA {
   border-bottom: 2px solid white;
@@ -49,22 +61,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(191, 191, 191);
 }
 .containerSection {
   margin-top: 5px;
-  height: 90px;
+  height: 85px;
 }
 .containerSectionB {
   margin-top: 10px;
-  height: 80px;
+  height: 65px;
 }
 .containerFlags {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 0px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid gray;
+  border-radius: 10px;
 }
 .containerSubmit {
   display: flex;
@@ -75,33 +89,37 @@
 }
 /*****TITULOS****+*/
 #createTitle {
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 35px;
+  font-weight: bolder;
   margin-top: 10px;
-  color: #09e7f6;
+  color: hsla(184, 93%, 50%, 0.9);
+  text-shadow: rgb(68, 68, 68, 0.5) 2px 2px 0px,
+    1px 2px 8px rgba(46, 44, 44, 0.67);
 }
 #titleListCountries {
   font-size: 16px;
   text-decoration-line: underline;
   /* font-weight: bold; */
-  margin-top: 0px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 8px;
   color: silver;
 }
 .titleInput {
   font-size: 16px;
   text-decoration-line: underline;
-  /* font-weight: bold; */
   margin-top: 0px;
   margin-bottom: 0px;
   color: silver;
 }
+
 /*****ELEMENTOS****+*/
 .dangerText {
-  color: rgb(229, 52, 52);
+  color: rgb(255, 136, 136);
   border-width: 2px;
-  font-size: 12px;
+  font-size: 14px;
   margin: 0px;
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
 }
 .inputBox {
   background-color: #e2e7f3da;
@@ -111,16 +129,20 @@
   margin: 5px;
   padding: 10px;
   width: 280px;
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
 }
 .danger {
   background-color: #e2e7f3da;
   color: #262424e5;
   border-radius: 10px;
-  border-color: rgb(229, 52, 52);
+  border-color: rgb(255, 83, 83);
   border-width: 2px;
-  margin: 5px;
+  margin: 2px;
   padding: 10px;
   width: 280px;
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
 }
 .filter {
   background-color: #2e4a7fda;
@@ -129,18 +151,38 @@
   margin: 5px;
   padding: 10px;
   width: 300px;
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
+}
+.filter option {
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
+}
+.filter input {
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
 }
 
 .dangerFilter {
-  background-color: #2e4a7fda;
+  background-color: rgba(46, 74, 127, 0.855);
   color: #00ccffe5;
   border-radius: 10px;
-  border-color: rgb(229, 52, 52);
+  border-color: rgb(255, 83, 83);
   border-width: 2px;
   border-radius: 10px;
   margin: 5px;
+  margin-bottom: 2px;
   padding: 10px;
   width: 300px;
+}
+
+.dangerFilter option {
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
+}
+.dangerFilter input:hidden {
+  font-family: Posterama Text, sans-serif;
+  font-size: 15px;
 }
 
 .flagTiny {
@@ -151,37 +193,55 @@
   margin: 0px;
 }
 
-.flagTiny img {
-  border-radius: 15px;
-  width: 70px;
-  height: 50px;
-  padding: 5px;
-  margin-top: 0px;
-  margin-bottom: -45px;
+.flagTinyFlag {
+  border-radius: 10px;
+  border: 1px solid rgb(85, 85, 85, 0.6);
+  width: 60px;
+  height: 45px;
+  padding: 0px;
+  margin-top: -3px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 .flagTiny span {
-  padding: none;
-  margin: none;
+  padding: 0px;
+  margin: 0px;
   font-size: 13px;
+  font-weight: lighter;
 }
 
 #littleX {
-  background-color: #373d4400;
-  border: none;
-  margin-bottom: 15px;
-  padding: none;
-  font-size: 20px;
+  color: silver;
+  background-color: #9a3a3af3;
+  border-radius: 90px;
+  border: 0.5px solid rgb(85, 85, 85, 0.5);
+  margin-bottom: 5px;
+  padding-bottom: 2px;
+  padding-top: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 15px;
   font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: white;
   cursor: pointer;
+  transition: 0.5s;
+}
+#littleX:hover {
+  color: white;
+  background-color: #d02c2cf3;
+  transition: 0.5s;
+}
+
+.buttonX {
+  width: 20px;
+  height: 20px;
 }
 
 .buttonSub:disabled {
   opacity: 0.7;
-  background-color: #636d6fe5;
-  color: #2e4a7fda;
-  font-size: 17px;
+  background-color: #3e4344e5;
+  color: silver;
+  font-size: 18px;
+  letter-spacing: 0.7px;
   border-radius: 10px;
   border: 1px solid #929191;
   margin: 0px;
@@ -190,12 +250,14 @@
   transition: 0.7s;
 }
 .buttonSub:disabled:hover {
-  background-color: #263c41e5;
+  background-color: #1f2223e5;
 }
 .buttonSub:enabled {
   background-color: #00ccffe5;
   color: #2e4a7fda;
-  font-size: 17px;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0.7px;
   border-radius: 10px;
   border: 1px solid #929191;
   padding: 10px;

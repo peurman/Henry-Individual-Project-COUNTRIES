@@ -1,79 +1,98 @@
-.country {
+.countryCard {
   text-align: center;
   width: 230px;
   height: 260px;
   padding: 10px;
   margin: 10px;
   color: rgb(255, 255, 255);
-  box-shadow: -2px 4px 4px 0 rgba(24, 13, 1, 0.633);
+  box-shadow: 0px 4px 8px 0 rgba(24, 13, 1, 0.33);
   transition: 0.3s;
-  background-color: #2e4a7fb1;
+  /* background-color: #2e4a7fb1; */
+  background: rgb(0, 7, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 7, 36, 0.75) 0%,
+    rgba(46, 74, 127, 1) 100%
+  );
   border-radius: 15px;
-  filter: opacity(70%);
-  transition: 0.3s;
+  filter: opacity(65%);
+  transition: 0.7s;
 }
-.countrydetail {
+.countryCard:hover {
+  filter: none;
+  transition: 0.7;
+}
+.countryCardDetail {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
+  font-weight: none;
+  letter-spacing: 0.7px;
 }
-.country:hover {
-  filter: none;
-  transition: 0.3s;
+
+/* LINK DE TODO EL CARD*/
+.countryCardLink {
+  text-decoration: none; /* saco el subrayado del link */
 }
-.country img {
+/* BANDERA*/
+.countryCard img {
   width: 92%;
   height: 150px;
   transition: 0.7s;
 }
-.country img:hover {
+.countryCard img:hover {
   width: 98%;
   height: 150px;
   transition: 0.7s;
 }
-
-.flag {
+/* .flag {
   align-self: center;
   border-radius: 15px;
   margin-top: 10px;
-}
-.countryLink {
-  text-decoration: none; /* saco el subrayado del link */
-}
+} */
+
+/* NOMBRE PAIS*/
 #nameCountry {
   color: rgb(253, 253, 251);
+  letter-spacing: 1px;
+  font-size: 19px;
+  font-weight: bold;
+  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 70px;
-  font-size: 18px;
-  font-weight: bold;
-  text-decoration: none;
   width: 100%;
   margin-bottom: 0px;
   transition: 0.5s;
+  text-shadow: rgba(33, 32, 32, 0.5) 1px 1px 0px,
+    2px 2px 8px rgba(46, 44, 44, 0.67);
 }
 #nameCountry:hover {
   color: #00ccffe5;
   transition: 0.5s;
 }
 
-#titleContinent {
-  color: rgb(166, 166, 165);
-  font-size: 15px;
-  text-decoration-line: underline;
-}
-#nameContinent {
-  color: silver;
-  text-decoration: none;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  width: 100%;
-  margin: 0px;
-}
+/* CONTINENTE*/
 .containerCont {
   background-color: none;
   margin: 0px;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 15px;
+  font-weight: none;
+  letter-spacing: 0.5px;
+}
+#titleContinent {
+  text-decoration-line: underline;
+}
+#nameContinent {
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  margin: 0px;
+  text-shadow: rgb(68, 68, 68, 0.5) 1px 1px 0px,
+    1px 1px 1px rgba(46, 44, 44, 0.67);
 }

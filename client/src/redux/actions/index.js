@@ -2,7 +2,7 @@ export const GET_ALL_COUNTRIES = "GET_ALL_COUNTRIES";
 export const GET_COUNTRY_DETAIL = "GET_COUNTRY_DETAIL";
 export const GET_COUNTRY_BY_SEARCH = "GET_COUNTRY_BY_SEARCH";
 export const GET_COUNTRIES_BY_FILTER = "GET_COUNTRIES_BY_FILTER";
-export const CREATE_ACTIVITY = "CREATE_ACTIVITY";
+export const POST_NEW_ACTIVITY = "POST_NEW_ACTIVITY";
 export const GET_ALL_ACTIVITIES = "GET_ALL_ACTIVITIES";
 export const EMPTY_STATE = "EMPTY_STATE";
 export const UPDATE_COUNTRIES = "UPDATE_COUNTRIES";
@@ -64,11 +64,11 @@ export const getCountryDetail = (id) => {
 // };
 
 // GET_COUNTRY_BY_SEARCH
-export function getCountryxSearch(name) {
+export function getCountryxSearch(continent, name) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/countries?name=${name}`
+        `http://localhost:3001/countries?continent=${continent}&name=${name}`
       );
       dispatch({
         type: GET_COUNTRY_BY_SEARCH,
@@ -105,8 +105,8 @@ export function getCountriesxFilter(continent, name) {
   };
 }
 
-// CREATE_ACTIVITY
-export const createActivity = (values) => {
+// POST_NEW_ACTIVITY
+export const postNewActivity = (values) => {
   return async function (dispatch) {
     try {
       var response = await axios.post(
@@ -114,7 +114,7 @@ export const createActivity = (values) => {
         values
       );
       return dispatch({
-        type: "CREATE_ACTIVITY",
+        type: "POST_NEW_ACTIVITY",
         payload: response.data,
       });
     } catch (error) {}

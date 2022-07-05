@@ -7,7 +7,7 @@ export default function SearchBar() {
   return (
     <div className="searchBar">
       <NavLink to="/" className="menuSearchBar">
-        ReStart
+        Restart
       </NavLink>
       <NavLink to="/home" className="menuSearchBar">
         Home

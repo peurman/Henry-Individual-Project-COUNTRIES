@@ -13,10 +13,18 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center; /*toda la info centrada*/
-  background: rgba(69, 77, 81, 0.899);
+  background: linear-gradient(
+    90deg,
+    rgba(25, 25, 25, 0.9) 0%,
+    rgba(111, 113, 124, 0.9) 20%,
+    rgba(111, 113, 124, 0.9) 80%,
+    rgba(25, 25, 25, 0.9) 100%
+  );
   border-radius: 20px;
   margin: 20px;
   padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 67%;
   backdrop-filter: blur(1px);
 }
@@ -31,6 +39,10 @@
   margin-bottom: 5px;
   border-color: silver;
   border-bottom-style: groove;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 16px;
+  font-weight: none;
+  letter-spacing: 0.7px;
 }
 .containerF1 {
   display: flex;
@@ -45,7 +57,6 @@
 .containerActB1 {
   width: 100%;
 }
-
 .containerListAct {
   display: flex;
   flex-direction: row;
@@ -53,15 +64,16 @@
   justify-content: center;
   padding: 0px 10px;
   margin: 10px;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 16px;
+  font-weight: none;
+  letter-spacing: 0.7px;
 }
 .noActivities {
+  font-weight: bold;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  color: whitesmoke;
-  font-size: 16px;
-  font-weight: bolder;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding: 20px;
   margin: 5px;
   border-radius: 10px;
@@ -82,22 +94,26 @@
 /*****TITULOS****+*/
 #countryTitle {
   font-size: 35px;
-  font-weight: bold;
+  font-weight: bolder;
   margin-top: 10px;
-  color: #09e7f6;
+  color: hsla(184, 93%, 50%, 0.9);
+  text-shadow: rgb(68, 68, 68, 0.5) 2px 2px 0px,
+    1px 2px 8px rgba(46, 44, 44, 0.67);
 }
 #activityTitle {
-  font-size: 27px;
+  font-size: 30px;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 0px;
-  color: #00e5ff;
+  color: hsla(184, 93%, 50%, 0.9);
+  text-shadow: rgb(68, 68, 68, 0.5) 2px 2px 0px,
+    1px 2px 8px rgba(46, 44, 44, 0.67);
 }
 #activityName {
   color: whitesmoke;
   font-size: 16px;
   font-weight: bolder;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Posterama Text, sans-serif;
   padding: 5px;
   padding-bottom: 0px;
   margin: 0px;
@@ -121,13 +137,12 @@
   transition: 0.7s;
 }
 .refLevels {
-  font-size: 12px;
+  font-size: 14px;
   color: silver;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Posterama Text, sans-serif;
 }
 
 .containerCharact {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -138,6 +153,10 @@
   margin: 10px;
   -webkit-box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.35);
   box-shadow: 0px 0px 20px 1px rgba(0, 0, 0, 0.35);
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 15px;
+  font-weight: none;
+  letter-spacing: 0.7px;
 }
 
 .containerCharactCenter {
@@ -147,8 +166,8 @@
   flex-wrap: wrap;
   padding: 3px;
   border-top: 1px solid silver;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .containerCharactFirst {
   display: flex;
@@ -157,8 +176,8 @@
   flex-wrap: wrap;
   padding: 3px;
   border: none;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 .containerCharactLast {
   display: flex;
@@ -167,8 +186,8 @@
   flex-wrap: wrap;
   padding: 3px;
   border-top: 1px solid silver;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .containerCharactCenter p,
@@ -184,8 +203,6 @@
 .containerCharactLast p:first-child {
   text-decoration: underline;
   color: silver;
-  font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 85px;
   margin: 2px;
 }
@@ -194,11 +211,9 @@
 .containerCharactFirst p:last-child,
 .containerCharactLast p:last-child {
   color: #00e5ff;
-  font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  /* font-weight: bold; */
   width: 220px;
   margin: 2px;
+  padding-left: 8px;
 }
 
 .containerActivity {
@@ -207,7 +222,6 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  /* justify-items: center; */
   border-radius: 10px;
   border: 1px solid silver;
   margin: 8px;
@@ -222,6 +236,7 @@
   border-top: 1px solid silver;
   margin-right: 10px;
   margin-left: 10px;
+  text-align: left;
 }
 .containerActivityFirst {
   display: flex;
@@ -249,8 +264,6 @@
 .containerActivityLast p:first-child {
   text-decoration: underline;
   color: silver;
-  font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 75px;
   margin: 2px;
   text-align: left;
@@ -260,10 +273,8 @@
 .containerActivityFirst p:last-child,
 .containerActivityLast p:last-child {
   color: #00e5ff;
-  font-size: 14px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  /* font-weight: bold; */
   width: 100px;
   margin: 2px;
   text-align: left;
+  padding-left: 8px;
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getAllCountries, createActivity } from "../../redux/actions";
+import { getAllCountries, postNewActivity } from "../../redux/actions";
 import "../../styles/CreateActivity.css";
 // importo Message para el Pop-Up
-import { Message } from "../Message/Message";
+import Message from "../Message/Message";
 
 // componente CREATE ACTIVITY
 export default function CreateActivity() {
@@ -131,16 +131,17 @@ export default function CreateActivity() {
   // SUBMIT > solicito el POST!!
   let handleSubmit = (e) => {
     e.preventDefault(); // -> al querer salir  aviso x info cargada
-    dispatch(createActivity(myForm)); // -> hago el POST
+    dispatch(postNewActivity(myForm)); // -> hago el POST
     updateFilters(); // -> limpio filtros
     setCountriesSelected([]); // -> vacía listado
     setMyForm({
+      // -> limpio formulario
       name: "",
       duration: "",
       difficulty: "",
       season: "",
       countryId: [],
-    }); // -> limpio formulario
+    });
     setSuccessMsg("createAct");
   };
 
@@ -159,7 +160,7 @@ export default function CreateActivity() {
         <div className="containerB2">
           <div className="containerC2">
             <div className="containerTitleA">
-              <span id="createTitle">CREATE ACTIVITY</span>
+              <span id="createTitle">New Activity</span>
             </div>
             <div className="containerCreateA">
               <div className="containerCreateB">
@@ -289,19 +290,25 @@ export default function CreateActivity() {
                       {errors.countryId}
                     </p>
                   </div>
-                  <p id="titleListCountries">Countries for this activity:</p>
+                  <p id="titleListCountries">
+                    Countries selected for this activity:
+                  </p>
                   <div className="containerFlags">
                     {countriesSelected &&
                       countriesSelected.map((item) => (
                         <div key={item.id} className="flagTiny">
-                          <img src={item.flag} alt="img" />
                           <button
                             type="button"
                             id="littleX"
                             onClick={() => OnCloseFlag(item.id)}
                           >
-                            X
+                            x
                           </button>
+                          <img
+                            src={item.flag}
+                            alt="img"
+                            className="flagTinyFlag"
+                          />
                           <span>{item.name}</span>
                         </div>
                       ))}

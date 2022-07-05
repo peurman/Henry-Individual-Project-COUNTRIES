@@ -16,12 +16,12 @@ import {
 // Componentes a usar:
 import Card from "../Card/Card";
 import Pages from "../Pages/Pages";
-import { Message } from "../Message/Message";
+import Message from "../Message/Message";
 
 // estilos:
 import "../../styles/Home.css";
 
-// Comp HOME -> traigo TODOS los paises + FILTROS + ORDEN
+// Comp HOME -> cargo PAISES + FILTROS + ORDEN
 export default function Home() {
   // GLOBAL
   const dispatch = useDispatch();
@@ -50,9 +50,9 @@ export default function Home() {
   const currentCountries = totalCountries.slice(
     indexOfFirstCountry,
     indexOfLastCountry
-  ); // -> me traigo de a tandas de 10 paises
+  ); // -> TANDAS de 10 paises, las CARDS que luego RENDERIZO
   function paginate(pageNumb) {
-    setCurrentPage(pageNumb); // -> seteo nuevo currentPage
+    setCurrentPage(pageNumb); // -> seteo nuevo currentPage en ESTADO LOCAL
   }
 
   // GET PAISES y GET ACTIVITIES al BACK =========================================
@@ -124,14 +124,14 @@ export default function Home() {
     if (errorDetected === 1) {
       setSuccessMsg("searchWithoutCount"); // -> mando POPUP de Error Search
       setNameFiltered(""); // -> borro buscador
-      dispatch(getAllCountries()); // -> GET recargo todos los países
+      // dispatch(getAllCountries()); // -> GET recargo todos los países
     }
     if (errorDetected === 2) {
       document.getElementById("filterCont").selectedIndex = "All"; // -> reseteo filtro Cont
       setSuccessMsg("noCountriesInCont"); // -> mando POPUP de Error Cont
     }
     dispatch(emptyError()); // -> pongo en cero el error
-  }, [errorDetected]);
+  }, [errorDetected, dispatch]);
 
   // SEARCH POR NOMBRE ====================================================
   function handleInputChange(e) {
@@ -147,9 +147,16 @@ export default function Home() {
     }
     setCurrentPage(1);
     console.log("FILTRO PAISES DESDE HOME");
-    dispatch(getCountryxSearch(nameFiltered)); // -> GET para cargar paises encontrados en ESTADO GLOBAL
+    //Hubo ya un CONTINENTE filtrado??
+    if (contSelected) {
+      if (contSelected === "All") {
+        dispatch(getCountryxSearch("", nameFiltered)); // -> filtro sólo con NAME del Search
+      } else dispatch(getCountryxSearch(contSelected, nameFiltered)); // -> Filtro con CONTINENT +NAME
+    } else dispatch(getCountryxSearch("", nameFiltered)); // -> filtro sólo con NAME del Search
+
+    // dispatch(getCountryxSearch(nameFiltered)); // -> GET para cargar paises encontrados en ESTADO GLOBAL
     setSwitcherSearch(true); // -> enciendo switch y aviso que se hizo una busqueda
-    document.getElementById("filterCont").selectedIndex = 0; // -> Reseteo el de Continente
+    // document.getElementById("filterCont").selectedIndex = 0; // -> Reseteo el de Continente
     updateFilter(); // -> Reseteo los 3 FILTROS
     // setNameFiltered(""); // -> borro el estado luego al disparar la busqueda
   }
@@ -196,15 +203,18 @@ export default function Home() {
         setFilteredActivity(true); // -> activo switch para avisar que YA hubo filtrado
         setCurrentPage(1);
         dispatch(updateCountries(countriesFiltered)); // -> ACTUALIZO COUNTRIES con los paises filtrados
-        document.getElementById("filterAct").selectedIndex = 0; // -> reseteo filtro
+        // document.getElementById("filterAct").selectedIndex = 0; // -> reseteo filtro
       } else {
-        setSuccessMsg("activityNotFound"); // -> mando POPUP de Error
+        setSuccessMsg("activityNotFound"); // -> POPUP: la actividad NO ESTA en esa seleccion de paises
         document.getElementById("filterAct").selectedIndex = 0; // -> reseteo filtro
-      } // -> POPUP: la actividad NO ESTA en esa seleccion de paises
+        document.getElementById("filterAZ").selectedIndex = 0;
+        document.getElementById("filterPop").selectedIndex = 0;
+        document.getElementById("filterCont").selectedIndex = 0;
+      }
     } else {
-      setSuccessMsg("countriesWithoutAct"); // -> mando POPUP de Error
+      setSuccessMsg("countriesWithoutAct"); // -> POPUP: los países no tienen NINGUNA ACTIVIDAD
       document.getElementById("filterAct").selectedIndex = 0; // -> reseteo filtro
-    } // -> POPUP: los países no tienen NINGUNA ACTIVIDAD
+    }
   }
 
   // RESETEO 3 FILTROS =====================================
@@ -267,7 +277,7 @@ export default function Home() {
             }}
           >
             <option value="" hidden>
-              Filer by Continent...
+              Filter by Continent...
             </option>
             <option value="Africa">Africa</option>
             <option value="America">America</option>
@@ -285,7 +295,7 @@ export default function Home() {
             onChange={(e) => handlexActivity(e)}
           >
             <option value="0" hidden>
-              Filer by Activity...
+              Filter by Activity...
             </option>
             {totalActivities?.map((curr) => {
               return (
@@ -306,6 +316,7 @@ export default function Home() {
         <div className="paginatorContainer">
           <div className="paginatorBorder">
             <button
+              // visibility={currentPage === 1 ? "hidden" : "visible"}
               disabled={currentPage === 1 ? true : false}
               onClick={() => {
                 paginate(currentPage - 1);
@@ -326,10 +337,15 @@ export default function Home() {
                   ? true
                   : false
               }
-              display="none" //visibility={if(currentPage ===Math.ceil(totalCountries.length / countriesPerPage)) "hidden "}
               onClick={() => {
                 paginate(currentPage + 1);
               }}
+              // display="none"
+              // visibility={
+              //   currentPage ===
+              //   1 + Math.ceil((totalCountries.length - 9) / countriesPerPage)
+              //     ? "hidden"
+              //     : "visible" }
             >
               <span id="pagPrevNext">NEXT</span>
             </button>

@@ -26,10 +26,19 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background: rgba(69, 77, 81, 0.899);
+  /* background: rgba(69, 77, 81, 0.899); */
+  background: linear-gradient(
+    90deg,
+    rgba(25, 25, 25, 0.9) 0%,
+    rgba(111, 113, 124, 0.9) 20%,
+    rgba(111, 113, 124, 0.9) 80%,
+    rgba(25, 25, 25, 0.9) 100%
+  );
   border-radius: 20px;
   margin: 20px;
   padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 10px;
   width: 70%;
   backdrop-filter: blur(1px);
 }
@@ -43,25 +52,24 @@
 
 .containerTitAbout {
   border-bottom: 2px solid white;
-  padding-bottom: 7px;
+  padding-bottom: 2px;
   margin-bottom: 5px;
+  margin-top: 10px;
   border-color: silver;
   border-bottom-style: groove;
 }
 
 .section1 span,
 .section2 span {
-  font-size: 30px;
-  font-weight: bold;
-  margin-top: 10px;
-  color: #09e7f6;
+  font-size: 35px;
+  font-weight: bolder;
+  margin-top: 0px;
+  color: hsla(184, 93%, 50%, 0.9);
+  letter-spacing: 0.7px;
+  text-shadow: rgb(68, 68, 68, 0.5) 2px 2px 0px,
+    1px 2px 8px rgba(46, 44, 44, 0.67);
 }
 .section3 {
-  /* border-bottom: 2px solid white;
-  padding-bottom: 7px;
-  margin-bottom: 5px;
-  border-color: silver;
-  border-bottom-style: groove; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -77,17 +85,15 @@
 .section4 {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: right;
-  justify-items: right;
-  text-align: right; */
   margin-top: 15px;
 }
 
 .datePI {
   padding: none;
-  font-size: 14px;
-  color: silver;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  color: rgba(34, 36, 36, 0.785);
+  font-weight: bolder;
+  letter-spacing: 0.5px;
 }
 
 .sectionp1,
@@ -97,26 +103,24 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  /* background-color: #2e4a7fda; */
   opacity: 0.9;
   border-radius: 10px;
-  /* border: 1px solid silver; */
-  /* margin: 10px; */
   box-shadow: 0px 0px 20px 1px rgb(0 0 0 / 25%);
 }
 .sectionp1 p,
 .sectionp2 p {
   padding-left: 10px;
   padding-right: 10px;
-  color: whitesmoke;
   margin: 5px;
-  font-size: 15px;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 16px;
   font-weight: none;
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  letter-spacing: 0.7px;
 }
 .section3 p {
-  color: whitesmoke;
+  color: rgba(245, 245, 245, 0.8);
   margin-top: 20px;
+  letter-spacing: 0.7px;
 }
 
 .logoLinkedin {
@@ -134,6 +138,7 @@
   justify-content: center;
   padding: 0px;
   margin: 0px;
+  margin-top: 5px;
 }
 
 .containerTech2 {
@@ -141,12 +146,24 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: whitesmoke;
-  margin: 5px;
-  font-size: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0px;
+  margin-bottom: 10px;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 16px;
   font-weight: none;
+  letter-spacing: 0.7px;
+  border: 2px solid rgba(192, 192, 192, 0.652);
+  border-radius: 10px;
+  border-style: groove;
+}
+
+.containerTech2 p {
+  margin: 0px;
+  padding: 0px;
+  border-bottom: 2px solid rgba(192, 192, 192, 0.652);
+  border-bottom-style: groove;
 }
 
 .containerTech3 {
@@ -158,5 +175,14 @@
   margin: 0px;
 }
 .backFront {
-  padding: 10px;
+  padding: 3px;
+}
+
+.backFront p {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0px;
+  font-weight: bold;
+  text-decoration: underline;
+  border: none;
 }

@@ -16,15 +16,14 @@ export default function About() {
                 </div>
                 <div className="sectionp1">
                   <p>
-                    Hello everyone! This website was created as an{" "}
-                    <b>Individual Project</b>
-                    for <b>Henry</b>'s Bootcamp.
+                    Hi everyone! This website was created as an{" "}
+                    <b>Individual Project</b> for <b>Henry</b>'s Bootcamp.
                   </p>
                   <p>
-                    The theme was about <b>COUNTRIES</b>, generating a list of
-                    them, exploring the details of each, applying filters, doing
-                    different sorting, and searching through a search bar. And
-                    then combining all of them.
+                    The thematic was about <b>COUNTRIES</b>, generating a list
+                    of them, exploring the details of each one, applying
+                    filters, doing different sorting, and searching through a
+                    search bar. And then combining all of that.
                   </p>
                   <p>
                     The website also had to be able to create activities, which
@@ -33,10 +32,22 @@ export default function About() {
                   </p>{" "}
                   <div className="containerTech">
                     <div className="containerTech2">
-                      <b>Technologies Used:</b>
+                      <p>Technologies Used:</p>
                       <div className="containerTech3">
-                        <div className="backFront">BackEnd</div>
-                        <div className="backFront">Frontend</div>
+                        <div className="backFront">
+                          <p>BackEnd</p>
+                          <div className="technologies">Node JS</div>
+                          <div className="technologies">Express</div>
+                          <div className="technologies">Sequelize</div>
+                          <div className="technologies">PostgreSQL</div>
+                        </div>
+                        <div className="backFront">
+                          <p>Frontend</p>
+                          <div className="technologies">React</div>
+                          <div className="technologies">Redux</div>
+                          <div className="technologies">HTML</div>
+                          <div className="technologies">CSS</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -48,16 +59,16 @@ export default function About() {
                 </div>
                 <div className="sectionp2">
                   <p>
-                    My name is <b>Esteban Manrupe</b>, an Electronics Engineer,
+                    My name is <b>Esteban Manrupe</b>, an Electronics Engineer
                     in a full process of reinvention and restiling, with an
-                    imminent goal: to become a <b>Full Stack Web Developer!</b>
+                    imminent goal: to become a <b>Full Stack Web Developer</b>.
                   </p>
                 </div>
               </div>
               <div className="section3">
                 <p>
-                  I like to share with you how you can find me, so feel free to
-                  contact me:
+                  I like to share with you these links, so feel free to contact
+                  me:
                 </p>
                 <a href="https://www.linkedin.com/in/estebanmanrupe/">
                   <img src={linkedin} alt="Lkduser" className="logoLinkedin" />

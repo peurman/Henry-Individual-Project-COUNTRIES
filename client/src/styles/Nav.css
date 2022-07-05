@@ -6,13 +6,31 @@
   justify-content: space-evenly;
   margin: -12px 20px 0px 20px;
   padding: 5px;
-  background: rgba(69, 77, 81, 0.899);
+  /* background: rgba(69, 77, 81, 0.899); */
+  background: linear-gradient(
+    90deg,
+    rgba(25, 25, 25, 0.9) 0%,
+    rgba(111, 113, 124, 0.9) 20%,
+    rgba(111, 113, 124, 0.9) 80%,
+    rgba(25, 25, 25, 0.9) 100%
+  );
   border-radius: 20px;
   backdrop-filter: blur(1px);
 }
 
 .menuSearchBar {
-  color: white;
+  color: rgba(245, 245, 245, 0.8);
+  font-size: 17px;
+  font-weight: none;
+  letter-spacing: 0.7px;
   text-decoration: none;
   cursor: pointer;
+}
+
+.menuSearchBar.active {
+  background-color: #00ccffb8;
+  padding: 5px;
+  padding-top: 2px;
+  margin: 0px;
+  border-radius: 7px;
 }
