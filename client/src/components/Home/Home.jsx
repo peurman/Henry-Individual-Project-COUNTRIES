@@ -17,6 +17,7 @@ import {
 import Card from "../Card/Card";
 import Pages from "../Pages/Pages";
 import Message from "../Message/Message";
+import Loading from "../Loading/Loading";
 
 // estilos:
 import "../../styles/Home.css";
@@ -38,7 +39,7 @@ export default function Home() {
   const [nameFiltered, setNameFiltered] = useState(""); // -> para el filtrado x NOMBRE
   const [contSelected, setContSelected] = useState(""); // -> para el filtrado x CONTINENTE
   // const [contSelectedPrev, setContSelectedPrev] = useState(""); // -> NO LA USO
-  const [switcherSearch, setSwitcherSearch] = useState(false); // -> para el ordenamiento
+  const [switcherSearch, setSwitcherSearch] = useState(false); // -> para el SEARCH
   const [filteredActivity, setFilteredActivity] = useState(false); // -> para el re filtrado
   const [successMsg, setSuccessMsg] = React.useState("none"); // -> para POPUP de ERRORES
 
@@ -69,6 +70,7 @@ export default function Home() {
     updateFilter(); // -> RESETEO LOS 4 FILTROS
     setNameFiltered(""); // -> borro el ESTADO LOCAL del SEARCH
     setContSelected(""); // -> borro el ESTADO LOCAL del CONT
+    setSwitcher("all");
     setSwitcherSearch(false); // -> apago switch y aviso que se hizo una busqueda
     setFilteredActivity(false); // -> para reinicer filtrado
     dispatch(getAllCountries()); // -> GET traigo todos los países
@@ -140,8 +142,11 @@ export default function Home() {
   function handleSubmit(e) {
     e.preventDefault();
     //chequeo si es valido el dato a buscar
-    if (nameFiltered.length === 0 || /\s/g.test(nameFiltered)) {
+    if (nameFiltered.length === 0) {
       return setSuccessMsg("searchWithoutLetters"); // alert("You have to write something to do the search");
+    } else if (/\s/g.test(nameFiltered)) {
+      setNameFiltered("");
+      return setSuccessMsg("searchWithSpaces"); // alert("Spaces ar not allowed");
     } else if (!/^[a-zA-Z&]+$/.test(nameFiltered)) {
       return setSuccessMsg("searchWithSpecChar"); // alert("No special characters allowed");
     }
@@ -150,14 +155,14 @@ export default function Home() {
     //Hubo ya un CONTINENTE filtrado??
     if (contSelected) {
       if (contSelected === "All") {
-        dispatch(getCountryxSearch("", nameFiltered)); // -> filtro sólo con NAME del Search
-      } else dispatch(getCountryxSearch(contSelected, nameFiltered)); // -> Filtro con CONTINENT +NAME
-    } else dispatch(getCountryxSearch("", nameFiltered)); // -> filtro sólo con NAME del Search
+        dispatch(getCountryxSearch("", nameFiltered)); // -> GET filtro sólo con NAME del Search
+      } else dispatch(getCountryxSearch(contSelected, nameFiltered)); // -> GET Filtro con CONTINENT +NAME
+    } else dispatch(getCountryxSearch("", nameFiltered)); // -> GET filtro sólo con NAME del Search
 
-    // dispatch(getCountryxSearch(nameFiltered)); // -> GET para cargar paises encontrados en ESTADO GLOBAL
+    updateFilter(); // -> Reseteo los 3 FILTROS
+    setSwitcher("all"); // -> Reseteo ordenamiento
     setSwitcherSearch(true); // -> enciendo switch y aviso que se hizo una busqueda
     // document.getElementById("filterCont").selectedIndex = 0; // -> Reseteo el de Continente
-    updateFilter(); // -> Reseteo los 3 FILTROS
     // setNameFiltered(""); // -> borro el estado luego al disparar la busqueda
   }
 
@@ -183,9 +188,10 @@ export default function Home() {
 
   // FILTRO POR ACTIVIDAD ==================================================
   function handlexActivity(e) {
+    console.log("ANTES DE HACER NADA, LA ACTIVIDAD", e.target.value);
     if (switcherSearch || filteredActivity) {
-      dispatch(updateCountries(countriesBUP)); // -> si ya habia busq, traigo el backup
       console.log("ANTES DE FILTRAR X ACTIV, CARGO DE NUEVO PAISES DEL SEARCH");
+      dispatch(updateCountries(countriesBUP)); // -> si ya habia busq, traigo el backup
     }
     if (totalCountries.filter((el) => el.activities.length > 0).length > 0) {
       let countriesFiltered = [];
@@ -195,6 +201,7 @@ export default function Home() {
       //     el.activities.find((a) => a.id === e.target.value))
       //     countriesFiltered.push(el); });
       // OPCION 2
+      console.log("JUSTO ANTES DE FILTRAR, LA ACTIVIDAD ES", e.target.value);
       countriesFiltered = totalCountries.filter((c) =>
         c.activities.find((a) => a.id === e.target.value)
       );
@@ -226,152 +233,157 @@ export default function Home() {
   }
 
   return (
-    <div className="wallpaperHome">
-      {/* <NavBar /> */}
-      <div className="consola">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            className="input"
-            placeholder="Search a country..."
-            value={nameFiltered}
-            onChange={handleInputChange}
-          />
-          <input className="search" type="submit" value="Search" />
-        </form>
-        <span>
-          <select
-            className="filterHome"
-            id="filterAZ"
-            onChange={(e) => {
-              ordering(e.target.value);
-            }}
-          >
-            <option value="1" hidden>
-              Order Alfabetically...
-            </option>
-            <option value="AZ">A - Z</option>
-            <option value="ZA">Z - A</option>
-          </select>
-        </span>
-        <span>
-          <select
-            className="filterHome"
-            id="filterPop"
-            onChange={(e) => {
-              ordering(e.target.value);
-            }}
-          >
-            <option value="0" hidden>
-              Order by Population...
-            </option>
-            <option value="popUP">Ascendant</option>
-            <option value="popDOWN">Descendant</option>
-          </select>
-        </span>
-        <span>
-          <select
-            id="filterCont"
-            className="filterHome"
-            onChange={(e) => {
-              handleFilterxContinent(e);
-            }}
-          >
-            <option value="" hidden>
-              Filter by Continent...
-            </option>
-            <option value="Africa">Africa</option>
-            <option value="America">America</option>
-            <option value="Antarctic">Antarctic</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-            <option value="All">ALL</option>
-          </select>
-        </span>
-        <span>
-          <select
-            id="filterAct"
-            className="filterHome"
-            onChange={(e) => handlexActivity(e)}
-          >
-            <option value="0" hidden>
-              Filter by Activity...
-            </option>
-            {totalActivities?.map((curr) => {
-              return (
-                <option key={curr.id} value={curr.id}>
-                  {curr.name}
-                </option>
-              );
-            })}
-          </select>
-        </span>
-        <span>
-          <button className="button" onClick={handleClick}>
-            RELOAD Countries
-          </button>
-        </span>
-      </div>
-      <div className="paginatorSpace">
-        <div className="paginatorContainer">
-          <div className="paginatorBorder">
-            <button
-              // visibility={currentPage === 1 ? "hidden" : "visible"}
-              disabled={currentPage === 1 ? true : false}
-              onClick={() => {
-                paginating(currentPage - 1);
-              }}
-            >
-              <span id="pagPrevNext">PREV</span>
-            </button>
-            <Pages
-              countriesxPage={countriesxPage}
-              totalCountries={totalCountries.length}
-              paginating={paginating}
-              currentPage={currentPage}
-            />
-            <button
-              disabled={
-                currentPage ===
-                1 + Math.ceil((totalCountries.length - 9) / countriesxPage)
-                  ? true
-                  : false
-              }
-              onClick={() => {
-                paginating(currentPage + 1);
-              }}
-              // display="none"
-              // visibility={
-              //   currentPage ===
-              //   1 + Math.ceil((totalCountries.length - 9) / countriesxPage)
-              //     ? "hidden"
-              //     : "visible" }
-            >
-              <span id="pagPrevNext">NEXT</span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="countrySpace">
-        <span className="countryContainer">
-          {currentCountries?.map((curr) => {
-            return (
-              <Card
-                key={curr.id}
-                id={curr.id}
-                name={curr.name}
-                flag={curr.flag}
-                continent={curr.continent}
+    <div className="home">
+      {totalCountries.length > 0 ? (
+        <div className="wallpaperHome">
+          <div className="consola">
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                className="input"
+                placeholder="Search a country..."
+                value={nameFiltered}
+                onChange={handleInputChange}
               />
-            );
-          })}
-        </span>
-      </div>
-      <Message // -> Renderizo Comp Message mandando "true"
-        onClose={() => setSuccessMsg("none")}
-        show={successMsg}
-      />
+              <input className="search" type="submit" value="Search" />
+            </form>
+            <span>
+              <select
+                className="filterHome"
+                id="filterAZ"
+                onChange={(e) => {
+                  ordering(e.target.value);
+                }}
+              >
+                <option value="1" hidden>
+                  Order Alfabetically...
+                </option>
+                <option value="AZ">A - Z</option>
+                <option value="ZA">Z - A</option>
+              </select>
+            </span>
+            <span>
+              <select
+                className="filterHome"
+                id="filterPop"
+                onChange={(e) => {
+                  ordering(e.target.value);
+                }}
+              >
+                <option value="0" hidden>
+                  Order by Population...
+                </option>
+                <option value="popUP">Ascendant</option>
+                <option value="popDOWN">Descendant</option>
+              </select>
+            </span>
+            <span>
+              <select
+                id="filterCont"
+                className="filterHome"
+                onChange={(e) => {
+                  handleFilterxContinent(e);
+                }}
+              >
+                <option value="" hidden>
+                  Filter by Continent...
+                </option>
+                <option value="Africa">Africa</option>
+                <option value="America">America</option>
+                <option value="Antarctic">Antarctic</option>
+                <option value="Asia">Asia</option>
+                <option value="Europe">Europe</option>
+                <option value="Oceania">Oceania</option>
+                <option value="All">ALL</option>
+              </select>
+            </span>
+            <span>
+              <select
+                id="filterAct"
+                className="filterHome"
+                onChange={(e) => handlexActivity(e)}
+              >
+                <option value="0" hidden>
+                  Filter by Activity...
+                </option>
+                {totalActivities?.map((curr) => {
+                  return (
+                    <option key={curr.id} value={curr.id}>
+                      {curr.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </span>
+            <span>
+              <button className="button" onClick={handleClick}>
+                RELOAD Countries
+              </button>
+            </span>
+          </div>
+          <div className="paginatorSpace">
+            <div className="paginatorContainer">
+              <div className="paginatorBorder">
+                <button
+                  // visibility={currentPage === 1 ? "hidden" : "visible"}
+                  disabled={currentPage === 1 ? true : false}
+                  onClick={() => {
+                    paginating(currentPage - 1);
+                  }}
+                >
+                  <span id="pagPrevNext">PREV</span>
+                </button>
+                <Pages
+                  countriesxPage={countriesxPage}
+                  totalCountries={totalCountries.length}
+                  paginating={paginating}
+                  currentPage={currentPage}
+                />
+                <button
+                  disabled={
+                    currentPage ===
+                    1 + Math.ceil((totalCountries.length - 9) / countriesxPage)
+                      ? true
+                      : false
+                  }
+                  onClick={() => {
+                    paginating(currentPage + 1);
+                  }}
+                  // display="none"
+                  // visibility={
+                  //   currentPage ===
+                  //   1 + Math.ceil((totalCountries.length - 9) / countriesxPage)
+                  //     ? "hidden"
+                  //     : "visible" }
+                >
+                  <span id="pagPrevNext">NEXT</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="countrySpace">
+            <span className="countryContainer">
+              {currentCountries?.map((curr) => {
+                return (
+                  <Card
+                    key={curr.id}
+                    id={curr.id}
+                    name={curr.name}
+                    flag={curr.flag}
+                    continent={curr.continent}
+                  />
+                );
+              })}
+            </span>
+          </div>
+          <Message // -> Renderizo Comp Message mandando "true"
+            onClose={() => setSuccessMsg("none")}
+            show={successMsg}
+          />
+        </div>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
