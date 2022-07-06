@@ -99,7 +99,7 @@ const rootReducer = (state = initialState, action) => {
     // case DELETE_ACTIVITY:
     //   return {
     //     // ...state,
-    //     // activities: state.activities.filter(({ id }) => id !== action.payload),
+    //     // activities: action.payload // state.activities.filter(({ id }) => id !== action.payload),
     //   };
     default:
       return state;

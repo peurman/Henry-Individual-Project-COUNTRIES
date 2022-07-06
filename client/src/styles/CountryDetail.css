@@ -1,6 +1,11 @@
 /*****CONTAINERS+++++*/
-.containerA {
+.containerA1 {
   border: none;
+  background-image: url("../assests/LandingA.jpg");
+  background-size: 100%;
+  background-position: 100%;
+  background-position: center;
+  background-repeat: repeat;
   height: 100vh;
 }
 .containerB1 {
@@ -93,7 +98,7 @@
 
 /*****TITULOS****+*/
 #countryTitle {
-  font-size: 35px;
+  font-size: 40px;
   font-weight: bolder;
   margin-top: 10px;
   color: hsla(184, 93%, 50%, 0.9);
@@ -277,4 +282,13 @@
   margin: 2px;
   text-align: left;
   padding-left: 8px;
+}
+
+.backButton {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
+}
+#backButton {
+  text-decoration: none;
 }

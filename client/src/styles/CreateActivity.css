@@ -6,14 +6,11 @@
   background-position: center;
   background-repeat: repeat;
   height: 100vh;
-  backdrop-filter: blur(20px);
-  backdrop-filter: sepia(10%);
 }
 
 .containerA2 {
   border: none;
-  height: 100vh;
-  backdrop-filter: blur(1px);
+  /* height: 100vh; */
 }
 .containerB2 {
   width: 100%;
@@ -174,13 +171,11 @@
   margin-bottom: 2px;
   padding: 10px;
   width: 300px;
-}
-
-.dangerFilter option {
   font-family: Posterama Text, sans-serif;
   font-size: 15px;
 }
-.dangerFilter input:hidden {
+
+.dangerFilter option {
   font-family: Posterama Text, sans-serif;
   font-size: 15px;
 }

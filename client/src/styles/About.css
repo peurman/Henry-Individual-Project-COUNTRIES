@@ -6,12 +6,10 @@
   background-position: center;
   background-repeat: repeat;
   height: 100vh;
-  backdrop-filter: blur(20px);
-  backdrop-filter: sepia(10%);
 }
 .containerA3 {
-  /* border: none;
-  height: 100vh;
+  border: none;
+  /* height: 100vh;
   backdrop-filter: blur(1px); */
 }
 .containerB3 {

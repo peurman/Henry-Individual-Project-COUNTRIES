@@ -6,6 +6,11 @@ import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import store from "./redux/store";
+import axios from "axios";
+import dotenv from "dotenv";
+dotenv.config();
+
+axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001"; // uso la URL del deploy o localhost
 
 ReactDOM.render(
   <React.StrictMode>

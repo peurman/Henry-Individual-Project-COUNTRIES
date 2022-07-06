@@ -11,13 +11,16 @@ const CountryDetail = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getCountryDetail(id)); // -> llena "countryDetail" del estado global
+    dispatch(getCountryDetail(id)); // -> llena "countryDetail" del ESTADO GLOBAL
     console.log("FILTRO PAIS DESDE COUNTRYDETAIL");
-    return () => dispatch({ type: "EMPTY_STATE" }); // emptyState()
+    return () => dispatch({ type: "EMPTY_STATE" }); // -> vacío "countryDetail" del ESTADO GLOBAL con emptyState()
   }, [dispatch, id]); // -> dependencia en dispatch para evitar repecitiones, y cada vez q actualiza ID
 
-  var upperName = countryDet.name?.toUpperCase(); // -> muerto el nombre en MAYUSC
+  var upperName = countryDet.name?.toUpperCase(); // -> muestro el nombre en MAYUSCULAS
 
+  function goBack() {
+    window.history.back();
+  }
   return (
     <div className="containerA1">
       <div className="containerB1">
@@ -95,6 +98,11 @@ const CountryDetail = (props) => {
                   )}
                 </div>
               </div>
+            </div>
+            <div className="backButton">
+              <button className="button" onClick={goBack}>
+                BACK
+              </button>
             </div>
           </div>
         </div>

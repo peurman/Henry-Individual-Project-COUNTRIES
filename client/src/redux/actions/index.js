@@ -18,7 +18,7 @@ const axios = require("axios"); // también uso fetch
 // GET_ALL_COUNTRIES con AXIOS
 export const getAllCountries = () => {
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/countries");
+    const response = await axios.get("/countries");
     dispatch({
       type: GET_ALL_COUNTRIES,
       payload: response.data, // -> trae arreglo de objetos paises
@@ -42,7 +42,7 @@ export const getAllCountries = () => {
 // GET_COUNTRY_DETAIL x ID con AXIOS
 export const getCountryDetail = (id) => {
   return async (dispatch) => {
-    const response = await axios.get("http://localhost:3001/countries/" + id);
+    const response = await axios.get("/countries/" + id);
     dispatch({
       type: GET_COUNTRY_DETAIL,
       payload: response.data, // -> trae objeto con ese país
@@ -68,7 +68,7 @@ export function getCountryxSearch(continent, name) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/countries?continent=${continent}&name=${name}`
+        `/countries?continent=${continent}&name=${name}`
       );
       dispatch({
         type: GET_COUNTRY_BY_SEARCH,
@@ -89,7 +89,7 @@ export function getCountriesxFilter(continent, name) {
   return async function (dispatch) {
     try {
       const response = await axios.get(
-        `http://localhost:3001/countries?continent=${continent}&name=${name}`
+        `/countries?continent=${continent}&name=${name}`
       );
       dispatch({
         type: GET_COUNTRIES_BY_FILTER,
@@ -109,10 +109,7 @@ export function getCountriesxFilter(continent, name) {
 export const postNewActivity = (values) => {
   return async function (dispatch) {
     try {
-      var response = await axios.post(
-        "http://localhost:3001/activities",
-        values
-      );
+      var response = await axios.post("/activities", values);
       return dispatch({
         type: "POST_NEW_ACTIVITY",
         payload: response.data,
@@ -123,7 +120,7 @@ export const postNewActivity = (values) => {
 
 // GET ALL ACTIVITIES
 export const getAllActivities = () => async (dispatch) => {
-  const response = await axios.get("http://localhost:3001/activities");
+  const response = await axios.get("/activities");
   dispatch({
     type: GET_ALL_ACTIVITIES,
     payload: response.data,

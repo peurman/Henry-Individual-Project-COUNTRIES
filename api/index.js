@@ -25,7 +25,7 @@ const loadDB = require("./src/loadDB/loadDB.js");
 conn.sync({ force: false }).then(async () => {
   try {
     await loadDB(); // CARGO la DB!!
-    server.listen(3001, () => {
+    server.listen(process.env.PORT, () => {
       console.log("%s listening at 3001"); // eslint-disable-line no-console
     });
   } catch (error) {

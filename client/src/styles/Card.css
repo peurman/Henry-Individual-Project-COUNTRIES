@@ -55,7 +55,7 @@
 
 /* NOMBRE PAIS*/
 #nameCountry {
-  color: rgb(253, 253, 251);
+  color: hsla(184, 93%, 50%, 0.9);
   letter-spacing: 1px;
   font-size: 19px;
   font-weight: bold;
@@ -71,7 +71,7 @@
     2px 2px 8px rgba(46, 44, 44, 0.67);
 }
 #nameCountry:hover {
-  color: #00ccffe5;
+  color: rgb(224, 224, 20);
   transition: 0.5s;
 }
 
@@ -79,7 +79,7 @@
 .containerCont {
   background-color: none;
   margin: 0px;
-  color: rgba(245, 245, 245, 0.8);
+  color: rgba(245, 245, 245, 0.9);
   font-size: 15px;
   font-weight: none;
   letter-spacing: 0.5px;

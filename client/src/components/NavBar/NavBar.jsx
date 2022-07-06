@@ -5,19 +5,21 @@ import "../../styles/Nav.css";
 
 export default function SearchBar() {
   return (
-    <div className="searchBar">
-      <NavLink to="/" className="menuSearchBar">
-        Restart
-      </NavLink>
-      <NavLink to="/home" className="menuSearchBar">
-        Home
-      </NavLink>
-      <NavLink to="/activities" className="menuSearchBar">
-        Create Activity
-      </NavLink>
-      <NavLink to="/about" className="menuSearchBar">
-        About
-      </NavLink>
+    <div className="base6">
+      <div className="searchBar">
+        <NavLink to="/" className="menuSearchBar">
+          Restart
+        </NavLink>
+        <NavLink to="/home" className="menuSearchBar">
+          Home
+        </NavLink>
+        <NavLink to="/activities" className="menuSearchBar">
+          Create Activity
+        </NavLink>
+        <NavLink to="/about" className="menuSearchBar">
+          About
+        </NavLink>
+      </div>
     </div>
   );
 }

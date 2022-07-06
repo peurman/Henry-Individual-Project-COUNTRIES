@@ -32,26 +32,26 @@ export default function Home() {
 
   // LOCAL
   const [currentPage, setCurrentPage] = useState(1); // -> para el paginado, arranco en 1
-  const [countriesPerPage] = useState(10); // -> para el paginado, defino 10 x pag o el NRO que quiera
+  const [countriesxPage] = useState(10); // -> para el paginado, defino 10 x pag o el NRO que quiera
 
   const [switcher, setSwitcher] = useState("all"); // -> para el ordenamiento
   const [nameFiltered, setNameFiltered] = useState(""); // -> para el filtrado x NOMBRE
   const [contSelected, setContSelected] = useState(""); // -> para el filtrado x CONTINENTE
-  const [contSelectedPrev, setContSelectedPrev] = useState(""); // -> para el filtrado x CONTINENTE
+  // const [contSelectedPrev, setContSelectedPrev] = useState(""); // -> NO LA USO
   const [switcherSearch, setSwitcherSearch] = useState(false); // -> para el ordenamiento
   const [filteredActivity, setFilteredActivity] = useState(false); // -> para el re filtrado
   const [successMsg, setSuccessMsg] = React.useState("none"); // -> para POPUP de ERRORES
 
   //PAGINADO ======================================================
   const indexOfLastCountry =
-    currentPage === 1 ? 9 : currentPage * countriesPerPage - 1; // -> indexEnd inicial set en 9, luego en Pag2 = 2*10-1=19
+    currentPage === 1 ? 9 : currentPage * countriesxPage - 1; // -> indexEnd inicial set en 9, luego en Pag2 = 2*10-1=19
   const indexOfFirstCountry =
-    currentPage === 1 ? 0 : indexOfLastCountry - countriesPerPage; // -> indexStart inicial set en 0, luego Pag2 = 19 - 10 = 9
+    currentPage === 1 ? 0 : indexOfLastCountry - countriesxPage; // -> indexStart inicial set en 0, luego Pag2 = 19 - 10 = 9
   const currentCountries = totalCountries.slice(
     indexOfFirstCountry,
     indexOfLastCountry
   ); // -> TANDAS de 10 paises, las CARDS que luego RENDERIZO
-  function paginate(pageNumb) {
+  function paginating(pageNumb) {
     setCurrentPage(pageNumb); // -> seteo nuevo currentPage en ESTADO LOCAL
   }
 
@@ -175,7 +175,7 @@ export default function Home() {
         dispatch(getCountriesxFilter("", "")); // -> ESTADO GLOBAL "countries" completo, sin filtros
       } else dispatch(getCountriesxFilter(e.target.value, "")); // -> ESTADO GLOBAL "countries" solo con CONT
     }
-    setContSelectedPrev(contSelected);
+    // setContSelectedPrev(contSelected);
     setContSelected(e.target.value);
     updateFilter(); // -> Reseteo 3 FILTROS, excepto CONTINENTE
     // ordering(switcher); // -> MANTENGO EL ULTIMO FILTRO???
@@ -209,7 +209,8 @@ export default function Home() {
         document.getElementById("filterAct").selectedIndex = 0; // -> reseteo filtro
         document.getElementById("filterAZ").selectedIndex = 0;
         document.getElementById("filterPop").selectedIndex = 0;
-        document.getElementById("filterCont").selectedIndex = 0;
+        if (!contSelected)
+          document.getElementById("filterCont").selectedIndex = 0;
       }
     } else {
       setSuccessMsg("countriesWithoutAct"); // -> POPUP: los países no tienen NINGUNA ACTIVIDAD
@@ -319,31 +320,31 @@ export default function Home() {
               // visibility={currentPage === 1 ? "hidden" : "visible"}
               disabled={currentPage === 1 ? true : false}
               onClick={() => {
-                paginate(currentPage - 1);
+                paginating(currentPage - 1);
               }}
             >
               <span id="pagPrevNext">PREV</span>
             </button>
             <Pages
-              countriesPerPage={countriesPerPage}
+              countriesxPage={countriesxPage}
               totalCountries={totalCountries.length}
-              paginate={paginate}
+              paginating={paginating}
               currentPage={currentPage}
             />
             <button
               disabled={
                 currentPage ===
-                1 + Math.ceil((totalCountries.length - 9) / countriesPerPage)
+                1 + Math.ceil((totalCountries.length - 9) / countriesxPage)
                   ? true
                   : false
               }
               onClick={() => {
-                paginate(currentPage + 1);
+                paginating(currentPage + 1);
               }}
               // display="none"
               // visibility={
               //   currentPage ===
-              //   1 + Math.ceil((totalCountries.length - 9) / countriesPerPage)
+              //   1 + Math.ceil((totalCountries.length - 9) / countriesxPage)
               //     ? "hidden"
               //     : "visible" }
             >
