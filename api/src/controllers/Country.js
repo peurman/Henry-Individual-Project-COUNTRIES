@@ -19,8 +19,8 @@ const getCountryxID = async (req, res, next) => {
 
 //GET COUNTRIES
 const getCountries = async (req, res) => {
-  const { name } = req.query; // -> si llega nombre de pais x query
-  const { continent } = req.query; // -> si llega filtro
+  const { continent, name } = req.query; // -> si llega nombre de pais x query
+  // const { continent } = req.query; // -> si llega filtro
   if (continent && name) {
     const response = await Country.findAll({
       where: {

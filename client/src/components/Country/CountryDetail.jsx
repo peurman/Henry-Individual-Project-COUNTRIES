@@ -67,7 +67,7 @@ const CountryDetail = (props) => {
                       <p>Population:</p>
                       <p>
                         {new Intl.NumberFormat().format(countryDet.population)}{" "}
-                        habitants
+                        inhabitants
                       </p>
                     </div>
                   </div>

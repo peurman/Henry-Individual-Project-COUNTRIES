@@ -117,6 +117,7 @@ export default function Home() {
       document.getElementById("filterAZ").selectedIndex = 0;
     }
     setSwitcher(val);
+    setCurrentPage(1); // -> ordeno y vuelvo a página 1
     console.log("ORDENO PAISES DESDE HOME");
     dispatch(updateCountries(totalCountries)); // -> actualiza estado global "countries"
   }
@@ -195,15 +196,9 @@ export default function Home() {
     }
     if (totalCountries.filter((el) => el.activities.length > 0).length > 0) {
       let countriesFiltered = [];
-      // OPCION 1
-      // totalCountries.forEach((el) => {
-      //   if (e.activities.length > 0 &&
-      //     el.activities.find((a) => a.id === e.target.value))
-      //     countriesFiltered.push(el); });
-      // OPCION 2
       console.log("JUSTO ANTES DE FILTRAR, LA ACTIVIDAD ES", e.target.value);
-      countriesFiltered = totalCountries.filter((c) =>
-        c.activities.find((a) => a.id === e.target.value)
+      countriesFiltered = countriesBUP.filter(
+        (c) => c.activities.find((a) => a.id === e.target.value) // -> hago el filtro direct. sobre el backup
       );
       console.log("PAISES FILTRADOS:", countriesFiltered);
       if (countriesFiltered.length > 0) {
