@@ -1,16 +1,13 @@
 /*****CONTAINERS+++++*/
 .base3 {
+  border: none;
+}
+.containerA3 {
   background-image: url("../assests/LandingA.jpg");
   background-size: 100%;
   background-position: 100%;
   background-position: center;
   background-repeat: repeat;
-  height: 100vh;
-}
-.containerA3 {
-  border: none;
-  /* height: 100vh;
-  backdrop-filter: blur(1px); */
 }
 .containerB3 {
   width: 100%;

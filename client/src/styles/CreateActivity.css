@@ -1,16 +1,17 @@
 /*****CONTAINERS+++++*/
 .base5 {
+  border: none;
+}
+
+.containerA2 {
   background-image: url("../assests/LandingA.jpg");
   background-size: 100%;
   background-position: 100%;
   background-position: center;
   background-repeat: repeat;
-  height: 100vh;
-}
-
-.containerA2 {
-  border: none;
-  /* height: 100vh; */
+  min-height: 100vh;
+  height: 100%;
+  /* background-size: cover; */
 }
 .containerB2 {
   width: 100%;

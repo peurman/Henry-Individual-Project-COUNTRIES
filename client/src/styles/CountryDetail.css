@@ -6,10 +6,11 @@
   background-position: 100%;
   background-position: center;
   background-repeat: repeat;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
+  /* background-size: cover; */
 }
 .containerB1 {
-  width: 100%;
   display: flex;
   justify-content: center; /*Centro la tarjeta*/
 }

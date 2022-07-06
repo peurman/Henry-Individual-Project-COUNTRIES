@@ -13,13 +13,11 @@
 .messageContainerA {
   border-radius: 10px;
   border: 1px solid #929191;
-  background: rgba(69, 77, 81, 0.899);
+  background: rgb(0, 7, 36);
   background: linear-gradient(
-    90deg,
-    rgba(25, 25, 25, 0.9) 0%,
-    rgba(111, 113, 124, 0.95) 35%,
-    rgba(111, 113, 124, 0.95) 65%,
-    rgba(25, 25, 25, 0.9) 100%
+    180deg,
+    rgba(0, 7, 36, 0.9) 0%,
+    rgba(46, 74, 127, 0.9) 100%
   );
 }
 
