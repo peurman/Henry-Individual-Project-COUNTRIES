@@ -25,15 +25,14 @@ export const getAllCountries = () => {
     });
   };
 };
-// ↑↑↑↑↑↑↑↑ GET_ALL_COUNTRIES con FETCH
+// ↑↑↑↑↑↑↑↑ GET_ALL_COUNTRIES con PROMISES
 // export const getAllCountries = () => {
-//   return async function (dispatch) {
-//     return fetch("http://localhost:3001/countries")
-//       .then((response) => response.json())
-//       .then((json) => {
+//   return function (dispatch) {
+//     axios.get("http://localhost:3001/countries")
+//       .then((response) => {
 //         dispatch({
 //           type: GET_ALL_COUNTRIES,
-//           payload: json, // -> trae arreglo de objetos paises
+//           payload: response.data, // -> trae arreglo de objetos paises
 //         });
 //       });
 //   };
@@ -57,7 +56,7 @@ export const getCountryDetail = (id) => {
 //       .then((json) => {
 //         dispatch({
 //           type: GET_COUNTRY_DETAIL,
-//           payload: json, // -> trae objeto con ese país
+//           payload: json.data, // -> trae objeto con ese país
 //         });
 //       });
 //   };
@@ -111,7 +110,7 @@ export const postNewActivity = (values) => {
     try {
       var response = await axios.post("/activities", values);
       return dispatch({
-        type: "POST_NEW_ACTIVITY",
+        type: POST_NEW_ACTIVITY,
         payload: response.data,
       });
     } catch (error) {}
@@ -159,8 +158,13 @@ export const emptyError = () => (dispatch) => {
 
 // ↓↓↓↓↓↓↓↓NO PEDIDA↓↓↓↓↓↓↓↓
 // export const deleteActivity = (id) => {
-//   return {
-//     type: DELETE_ACTIVITY,
-//     payload: id,
+//    return async function (dispatch) {
+//     try {
+//       var response = await axios.delete("/activities", id);
+//       return dispatch({
+//         type: DELETE_ACTIVITY,
+//         payload: response.data,
+//       });
+//     } catch (error) {}
 //   };
 // };

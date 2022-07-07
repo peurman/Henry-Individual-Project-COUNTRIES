@@ -29,7 +29,7 @@ export default function CreateActivity() {
 
   // GET PAISES y GET ACTIVITIES al BACK
   useEffect(() => {
-    console.log("PIDO PAISES Y ACTIVIDADES DESDE CREATE ACTIVITY");
+    // console.log("PIDO PAISES Y ACTIVIDADES DESDE CREATE ACTIVITY");
     dispatch(getAllCountries()); // -> me traigo todos los países
   }, [dispatch]); // -> dependencia en dispatch para evitar repecitiones
 
@@ -125,13 +125,13 @@ export default function CreateActivity() {
       })
     );
     document.getElementById("countries").selectedIndex = "";
-    setCountriesSelected(depurated);
+    setCountriesSelected(depurated); // -> actualizo  array paises elegidos, sacando el que se cerro
   }
 
   // SUBMIT > solicito el POST!!
   let handleSubmit = (e) => {
     e.preventDefault(); // -> al querer salir  aviso x info cargada
-    dispatch(postNewActivity(myForm)); // -> hago el POST
+    dispatch(postNewActivity(myForm)); // -> solicito el POST
     updateFilters(); // -> limpio filtros
     setCountriesSelected([]); // -> vacía listado
     setMyForm({
@@ -142,7 +142,7 @@ export default function CreateActivity() {
       season: "",
       countryId: [],
     });
-    setSuccessMsg("createAct");
+    setSuccessMsg("createAct"); // -> POPUP actividad creada!
   };
 
   //reseteo ambos filtros

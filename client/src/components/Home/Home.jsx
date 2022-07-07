@@ -29,7 +29,7 @@ export default function Home() {
   const totalCountries = useSelector((state) => state.countries); // -> uso estado GLOBAL para traer los paises
   const countriesBUP = useSelector((state) => state.countriesBackUp); // -> uso estado GLOBAL para reutilizar busqueda
   const totalActivities = useSelector((state) => state.activities); // -> uso estado GLOBAL para traer las actividades
-  const errorDetected = useSelector((state) => state.error);
+  const errorDetected = useSelector((state) => state.error); // -> uso estado GLOBAL para manejar POPUP
 
   // LOCAL
   const [currentPage, setCurrentPage] = useState(1); // -> para el paginado, arranco en 1
@@ -58,14 +58,14 @@ export default function Home() {
 
   // GET PAISES y GET ACTIVITIES al BACK =========================================
   useEffect(() => {
-    console.log("PIDO PAISES Y ACTIVIDADES DESDE HOME");
+    // console.log("PIDO PAISES Y ACTIVIDADES DESDE HOME");
     dispatch(getAllCountries()); // -> GET traigo todos los países
     dispatch(getAllActivities()); // -> GET traigo todas las actividades
   }, [dispatch]); // -> dependencia en dispatch para evitar repecitiones
 
   // RECARGO PAISES con RELOAD =========================================
   function handleClick() {
-    console.log("RECARGO PAISES con RELOAD");
+    // console.log("RECARGO PAISES con RELOAD");
     document.getElementById("filterCont").selectedIndex = 0;
     updateFilter(); // -> RESETEO LOS 4 FILTROS
     setNameFiltered(""); // -> borro el ESTADO LOCAL del SEARCH
@@ -118,7 +118,7 @@ export default function Home() {
     }
     setSwitcher(val);
     setCurrentPage(1); // -> ordeno y vuelvo a página 1
-    console.log("ORDENO PAISES DESDE HOME");
+    // console.log("ORDENO PAISES DESDE HOME");
     dispatch(updateCountries(totalCountries)); // -> actualiza estado global "countries"
   }
 
@@ -152,7 +152,7 @@ export default function Home() {
       return setSuccessMsg("searchWithSpecChar"); // alert("No special characters allowed");
     }
     setCurrentPage(1);
-    console.log("FILTRO PAISES DESDE HOME");
+    // console.log("FILTRO PAISES DESDE HOME");
     //Hubo ya un CONTINENTE filtrado??
     if (contSelected) {
       if (contSelected === "All") {
@@ -170,7 +170,7 @@ export default function Home() {
   // FILTRO POR CONTINENTE ==============================================
   function handleFilterxContinent(e) {
     setCurrentPage(1);
-    console.log("FILTRO CONTINENTE DESDE HOME");
+    // console.log("FILTRO CONTINENTE DESDE HOME");
     //Hubo ya una BUSQUEDA??
     if (switcherSearch) {
       if (e.target.value === "All") {
@@ -189,18 +189,18 @@ export default function Home() {
 
   // FILTRO POR ACTIVIDAD ==================================================
   function handlexActivity(e) {
-    console.log("ANTES DE HACER NADA, LA ACTIVIDAD", e.target.value);
+    // console.log("ANTES DE HACER NADA, LA ACTIVIDAD", e.target.value);
     if (switcherSearch || filteredActivity) {
-      console.log("ANTES DE FILTRAR X ACTIV, CARGO DE NUEVO PAISES DEL SEARCH");
+      // console.log("ANTES DE FILTRAR X ACTIV, CARGO DE NUEVO PAISES DEL SEARCH");
       dispatch(updateCountries(countriesBUP)); // -> si ya habia busq, traigo el backup
     }
     if (totalCountries.filter((el) => el.activities.length > 0).length > 0) {
       let countriesFiltered = [];
-      console.log("JUSTO ANTES DE FILTRAR, LA ACTIVIDAD ES", e.target.value);
+      // console.log("JUSTO ANTES DE FILTRAR, LA ACTIVIDAD ES", e.target.value);
       countriesFiltered = countriesBUP.filter(
         (c) => c.activities.find((a) => a.id === e.target.value) // -> hago el filtro direct. sobre el backup
       );
-      console.log("PAISES FILTRADOS:", countriesFiltered);
+      // console.log("PAISES FILTRADOS:", countriesFiltered);
       if (countriesFiltered.length > 0) {
         setFilteredActivity(true); // -> activo switch para avisar que YA hubo filtrado
         setCurrentPage(1);

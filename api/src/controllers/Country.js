@@ -83,7 +83,9 @@ const getCountries = async (req, res) => {
       // order: [["name", "ASC"]],
     });
     if (response.length === 0) {
-      return res.status(404).send(`Cannot apply filter ${filter}`);
+      return res
+        .status(404)
+        .send(`Cannot find countries with continent ${continent}`);
     }
     res.status(201).json(response);
   } else {
@@ -94,7 +96,8 @@ const getCountries = async (req, res) => {
       include: { model: Activity },
     });
     if (response.length === 0) {
-      console.log("Error:", error);
+      // console.log("Error:", error);
+      return res.status(404).send(`Cannot find countries`);
     }
     res.status(201).json(response);
   }

@@ -1,4 +1,4 @@
-require("dotenv").config(); // Dotenv es un módulo de nmp que carga las variables de entorno de un archivo .env en process.env.para poder cargar el archivo .env
+require("dotenv").config(); // Dotenv es un módulo de npm que carga las variables de entorno de un archivo .env en process.env.para poder cargar el archivo .env
 
 const { Sequelize } = require("sequelize"); // importo Sequelize
 const fs = require("fs"); // FS es parte de Node.js, para acceder e interactuaar con el file system

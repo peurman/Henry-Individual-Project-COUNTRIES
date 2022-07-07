@@ -13,7 +13,7 @@ const CountryDetail = (props) => {
 
   React.useEffect(() => {
     dispatch(getCountryDetail(id)); // -> llena "countryDetail" del ESTADO GLOBAL
-    console.log("FILTRO PAIS DESDE COUNTRYDETAIL");
+    // console.log("FILTRO PAIS DESDE COUNTRYDETAIL");
     return () => dispatch({ type: "EMPTY_STATE" }); // -> vacío "countryDetail" del ESTADO GLOBAL con emptyState()
   }, [dispatch, id]); // -> dependencia en dispatch para evitar repecitiones, y cada vez q actualiza ID
 

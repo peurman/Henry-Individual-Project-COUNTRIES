@@ -63,27 +63,27 @@ const rootReducer = (state = initialState, action) => {
     case EMPTY_STATE:
       return {
         ...state,
-        countryDetail: {},
+        countryDetail: {}, // -> vacio detalle país
       };
     case UPDATE_COUNTRIES:
       return {
         ...state,
-        countries: action.payload, // todos los paises ordenados
+        countries: action.payload, // actualizo países
       };
     case ERROR_RECEIVED_1:
       return {
         ...state,
-        error: 1, // todos los paises ordenados
+        error: 1, // error en el search pais
       };
     case ERROR_RECEIVED_2:
       return {
         ...state,
-        error: 2, // todos los paises ordenados
+        error: 2, // error en el filtro x continente
       };
     case EMPTY_ERROR:
       return {
         ...state,
-        error: 0, // todos los paises ordenados
+        error: 0, // -> vacío error
       };
     // case COUNTRY_BY_ACTIVITY: // -> lo hago en componente HOME
     //   const allcountries = state.countries;
