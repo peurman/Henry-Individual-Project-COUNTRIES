@@ -96,18 +96,21 @@ export default function CreateActivity() {
   // Agreo PAIS al arreglo countriesSelected
   let handleChangeCountry = (e) => {
     let selected = totalCountries.find((c) => c.name === e.target.value); // -> pais seleccionado
-    let list = [...myForm.countryId, selected.id]; // -> agrego id del pais seleccionad
-    setErrors(
-      validate({
+
+    if (!countriesSelected.find((el) => el.id === selected.id)) {
+      let list = [...myForm.countryId, selected.id]; // -> agrego id del pais seleccionad
+      setErrors(
+        validate({
+          ...myForm,
+          countryId: list, // -> actualizo lista en el error
+        })
+      );
+      setMyForm({
         ...myForm,
-        countryId: list, // -> actualizo lista en el error
-      })
-    );
-    setMyForm({
-      ...myForm,
-      countryId: list, // -> actualizo listado de ID de paises
-    });
-    setCountriesSelected((elements) => [...elements, selected]); // -> agrego al array paises elegido
+        countryId: list, // -> actualizo listado de ID de paises
+      });
+      setCountriesSelected((elements) => [...elements, selected]); // -> agrego al array paises elegido}
+    } else setSuccessMsg("onlyOnce"); // -> POPUP NO podés agregar 2 veces el mismo pais!
   };
 
   // elimino BANDERA y NOMBRE de algun pais elegido

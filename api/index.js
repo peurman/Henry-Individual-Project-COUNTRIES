@@ -24,7 +24,7 @@ const loadDB = require("./src/loadDB/loadDB.js");
 // Syncing all the models at once -> hago FORCE FALSE para no llamar a la API cada vez que se ejecuta el server
 conn.sync({ force: false }).then(async () => {
   try {
-    await loadDB(); // CARGO la DB con la función que importo desde loadDB.js
+    await loadDB(); // CARGO la DB con la función que importo desde loadDB.js - genero TABLAS
     server.listen(process.env.PORT, () => {
       console.log("%s listening at 3001"); // eslint-disable-line no-console
     });

@@ -30,6 +30,8 @@ export default function Message({ show, onClose }) {
                 ? "It is not possible to use special characters or numbers to perform the search, please use only common letters"
                 : show === "noCountriesInCont"
                 ? "In the current selection of countries, none of them is located in this continent."
+                : show === "onlyOnce"
+                ? "You cannot add the same country more than one time"
                 : "No countries were found with the selected search"}
             </span>
           </div>

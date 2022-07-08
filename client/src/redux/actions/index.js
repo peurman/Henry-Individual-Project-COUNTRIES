@@ -32,7 +32,7 @@ export const getAllCountries = () => {
 //       .then((response) => {
 //         dispatch({
 //           type: GET_ALL_COUNTRIES,
-//           payload: response.data, // -> trae arreglo de objetos paises
+//           payload: response.data,
 //         });
 //       });
 //   };
