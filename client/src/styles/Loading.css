@@ -6,13 +6,14 @@
 }
 
 .containerLoading img {
-  height: 15%;
-  width: 15%;
-  margin: 20px;
-  padding: 30px;
+  height: 120px;
+  width: 120px;
+  margin: auto;
+  display: block;
 }
 
 .containerLoading p {
-  margin: 20px;
-  padding: 20px;
+  padding-top: 30px;
+  margin: auto;
+  display: block;
 }

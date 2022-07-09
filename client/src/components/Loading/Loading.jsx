@@ -6,12 +6,8 @@ const Loading = () => {
   return (
     <div className="containerA1">
       <div className="containerLoading">
-        <img
-          src={loading}
-          style={{ width: "200px", margin: "auto", display: "block" }}
-          alt="Loading"
-        />
-        <p id="activityTitle">Cargando...</p>
+        <p id="activityTitle">Loading...</p>
+        <img src={loading} alt="Loading" />
       </div>
     </div>
   );
