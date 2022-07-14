@@ -37,8 +37,9 @@ export default function CreateActivity() {
   function validate(input) {
     let errors = {};
 
-    if (!input.name) {
-      errors.name = "The name of the activity is required";
+    if (!input.name || /\s/g.test(input.name)) {
+      errors.name =
+        "The name of the activity is required, spaces are not allowed";
     } else if (!/^[a-zA-Z0-9& áéíóú]+$/.test(input.name)) {
       errors.name =
         "Activity name is invalid, no special characters are allowed"; // -> "/[$%&|<>#]/" valida caracteres especiales
