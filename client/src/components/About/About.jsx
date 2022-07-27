@@ -31,8 +31,8 @@ export default function About() {
                     filter the countries that had those activities.
                   </p> */}
                   <span>
-                    The thematic was about <b>Countries of the world</b>,
-                    following certain mandatory guidelines:
+                    The theme was about <b>Countries of the world</b>, following
+                    certain mandatory guidelines:
                     <ul>
                       ◽ Get the information from an external API, and create an
                       own database to fill it with that information.
@@ -100,8 +100,8 @@ export default function About() {
                 <div className="sectionp2">
                   <span>
                     My name is <b>Esteban Manrupe</b>, an Electronics Engineer
-                    in a full process of reinvention and restiling, with an
-                    imminent goal: to become a <b>Full Stack Web Developer</b>.
+                    in a full process of reskilling, with an imminent goal: to
+                    become a <b>Full Stack Web Developer</b>.
                   </span>
                 </div>
               </div>
