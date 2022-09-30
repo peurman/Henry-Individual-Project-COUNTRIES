@@ -13,8 +13,6 @@
 .landing {
   color: white;
   width: 80%;
-  /* -webkit-box-shadow: inset 8px 5px 120px 39px rgba (0, 0, 0, 0.12);
-  box-shadow: inset 8px 5px 120px 39px rgba(0, 0, 0, 0.12); */
   background: linear-gradient(
     90deg,
     rgba(25, 25, 25, 0.1) 0%,

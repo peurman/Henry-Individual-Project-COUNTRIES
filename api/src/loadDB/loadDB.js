@@ -1,18 +1,12 @@
-// Instalo e importo AXIOS
 const axios = require("axios");
 const { Country } = require("../db");
 
-//ENDPOINTS  de paises: https://restcountries.com/v3/all
-// GET https://restcountries.com/v3/name/{name}
-// GET https://restcountries.com/v3/alpha/{code}
-
 const removeDiacritics = (str) => {
-  return str.normalize("NFD").replace(/[\u0300-\u036fÅ]/g, ""); // elimino acentos y caracter Å
+  return str.normalize("NFD").replace(/[\u0300-\u036fÅ]/g, "");
 };
 
-// TRAIGO TODA LA INFO DE LA API SI ES QUE LA DB ESTA VACIA
 const loadDB = async () => {
-  const full = await Country.count(); // -> verifico si la tabla ya esta llena
+  const full = await Country.count();
   if (!full) {
     const api = await axios.get("https://restcountries.com/v3/all");
     const data = api.data.map((el) => {
@@ -27,7 +21,7 @@ const loadDB = async () => {
         population: el.population,
       };
     });
-    await Country.bulkCreate(data); // -> lleno la DB con todos los paises
+    await Country.bulkCreate(data);
     console.log("I CALL THE API WITH AXIOS.GET");
   } else {
     console.log("DB HAD ALREADY DATA");
@@ -35,4 +29,4 @@ const loadDB = async () => {
   console.log("DB IS ALREADY FILLED");
 };
 
-module.exports = loadDB; // -> exporto la funcion para llamarla desde el index.js
+module.exports = loadDB;

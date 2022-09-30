@@ -53,9 +53,7 @@ fs.readdirSync(path.join(__dirname, "/models"))
   .forEach((file) => {
     modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
-// Inyectamos la conexion (sequelize) a todos los modelos
 modelDefiners.forEach((model) => model(sequelize));
-// Capitalizamos los nombres de los modelos ie: product => Product
 let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [
   entry[0][0].toUpperCase() + entry[0].slice(1),
@@ -70,17 +68,12 @@ modelCharacter(sequelize);
 modelAbility(sequelize);
 */
 
-// En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
 const { Country, Activity } = sequelize.models;
-
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
 
 Country.belongsToMany(Activity, { through: "Country_Activity" });
 Activity.belongsToMany(Country, { through: "Country_Activity" });
 
-// para ver los MIXINS generados de cada modelo Country o Activity
+// MIXINS generados de cada modelo Country o Activity
 // const model = Activity; // yourSequelizeModel
 // for (let assoc of Object.keys(model.associations)) {
 //   for (let accessor of Object.keys(model.associations[assoc].accessors)) {
@@ -91,6 +84,6 @@ Activity.belongsToMany(Country, { through: "Country_Activity" });
 // }
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  ...sequelize.models,
+  conn: sequelize,
 };

@@ -8,10 +8,10 @@ export default function Pages({
 }) {
   const pageNum = [];
 
-  let maxPages = 1 + Math.ceil((totalCountries - 9) / countriesxPage); // -> entero maximo siguiente, saco 9 paises de pag 1
+  let maxPages = 1 + Math.ceil((totalCountries - 9) / countriesxPage);
 
   for (let i = 1; i <= maxPages; i++) {
-    pageNum.push(i); // -> arreglo con todos los nros de página
+    pageNum.push(i);
   }
 
   return (

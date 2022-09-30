@@ -2,13 +2,11 @@
 
 const { Activity } = require("../db");
 
-//GET ACTIVITIES
 const getActivities = async (req, res) => {
   const activity = await Activity.findAll({ order: [["name", "ASC"]] });
   return res.json(activity);
 };
 
-//POST ACTIVITY
 const postActivity = async (req, res, next) => {
   const { name, duration, difficulty, season, countryId } = req.body;
   if (!name || !duration || !difficulty || !season || countryId.length === 0) {
@@ -26,7 +24,6 @@ const postActivity = async (req, res, next) => {
     });
     console.log(created);
 
-    // SETEO RELACIONES para volcar datos en la tabla intermadia
     await activity.setCountries(countryId);
 
     return res.json(activity);

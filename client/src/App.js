@@ -1,6 +1,5 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-// modelos que renderizo:
 import Landing from "./components/Landing/Landing";
 import Previous from "./components/Previous/Previous";
 

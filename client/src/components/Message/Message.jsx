@@ -1,7 +1,7 @@
 import "../../styles/Message.css";
 
 export default function Message({ show, onClose }) {
-  if (show === "none") return null; // -> si es FALSO NO HACE NADA
+  if (show === "none") return null;
 
   return (
     <div className="messageMain" id="messageMain">

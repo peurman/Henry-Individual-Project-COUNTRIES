@@ -2,7 +2,6 @@ import React from "react";
 import "../../styles/Card.css";
 import { NavLink } from "react-router-dom";
 
-// Modelo de CARD de cada pais, con LINK al respect país
 export default function Card(props) {
   return (
     <div className="countryCard">

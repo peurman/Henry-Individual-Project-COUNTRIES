@@ -7,18 +7,16 @@ import "../../styles/CountryDetail.css";
 import Loading from "../Loading/Loading";
 
 const CountryDetail = (props) => {
-  const { id } = useParams(); // -> me traigo ID x params
-  let countryDet = useSelector((state) => state.countryDetail); // info del estado global
+  const { id } = useParams();
+  let countryDet = useSelector((state) => state.countryDetail);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getCountryDetail(id)); // -> llena "countryDetail" del ESTADO GLOBAL
-    // console.log("FILTRO PAIS DESDE COUNTRYDETAIL");
-    return () => dispatch({ type: "EMPTY_STATE" }); // -> vacío "countryDetail" del ESTADO GLOBAL con emptyState()
-  }, [dispatch, id]); // -> dependencia en dispatch para evitar repecitiones, y cada vez q actualiza ID
+    dispatch(getCountryDetail(id));
+    return () => dispatch({ type: "EMPTY_STATE" });
+  }, [dispatch, id]);
 
-  var upperName = countryDet.name?.toUpperCase(); // -> muestro el nombre en MAYUSCULAS
-
+  var upperName = countryDet.name?.toUpperCase();
   function goBack() {
     window.history.back();
   }
@@ -104,7 +102,7 @@ const CountryDetail = (props) => {
                         ))
                       ) : (
                         <p className="noActivities">
-                          No activites were created{" "}
+                          No activites were created
                         </p>
                       )}
                     </div>

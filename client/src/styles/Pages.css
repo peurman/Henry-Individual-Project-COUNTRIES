@@ -1,5 +1,5 @@
 .pagination ul {
-  margin-left: -30px; /* -> para poder centrarlo */
+  margin-left: -30px;
   display: flex;
   align-items: center;
   justify-content: center;

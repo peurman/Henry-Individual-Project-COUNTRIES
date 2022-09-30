@@ -1,9 +1,6 @@
-/*  Métodos GET del modelo COUNTRY */
-
 const { Country, Activity } = require("../db");
 const { Op } = require("sequelize");
 
-//GET COUNTRY x ID
 const getCountryxID = async (req, res, next) => {
   const { id } = req.params; // -> si me llega 1 pais x query
   const response = await Country.findByPk(id.toUpperCase(), {
@@ -16,23 +13,20 @@ const getCountryxID = async (req, res, next) => {
   }
   res.status(201).json(response);
 };
-
-//GET COUNTRIES
 const getCountries = async (req, res) => {
-  const { continent, name } = req.query; // -> si llega nombre de pais x query
-  // const { continent } = req.query; // -> si llega filtro
+  const { continent, name } = req.query;
   if (continent && name) {
     const response = await Country.findAll({
       where: {
         [Op.and]: [
           {
             continent: {
-              [Op.iLike]: "%" + continent + "%", // -> si contiene continent
+              [Op.iLike]: "%" + continent + "%",
             },
           },
           {
             name: {
-              [Op.iLike]: "%" + name + "%", // -> si contiene name
+              [Op.iLike]: "%" + name + "%",
             },
           },
         ],
@@ -51,10 +45,9 @@ const getCountries = async (req, res) => {
     const response = await Country.findAll({
       where: {
         name: {
-          [Op.iLike]: "%" + name + "%", // -> si contiene name
+          [Op.iLike]: "%" + name + "%",
         },
       },
-      // order: [["name", "ASC"]],
       include: Activity,
     });
     if (response.length === 0) {
@@ -67,20 +60,14 @@ const getCountries = async (req, res) => {
     const response = await Country.findAll({
       where: {
         [Op.or]: [
-          // {
-          //   subregion: {
-          //     [Op.iLike]: "%" + continent + "%", // -> si contiene continent
-          //   },
-          // },
           {
             continent: {
-              [Op.iLike]: "%" + continent + "%", // -> si contiene continent
+              [Op.iLike]: "%" + continent + "%",
             },
           },
         ],
       },
       include: Activity,
-      // order: [["name", "ASC"]],
     });
     if (response.length === 0) {
       return res
@@ -92,11 +79,9 @@ const getCountries = async (req, res) => {
     const response = await Country.findAll({
       limit: 250,
       offset: req.query.page ? req.query.page : 0,
-      // order: [["name", req.query.order ? req.query.order : "ASC"]],
       include: { model: Activity },
     });
     if (response.length === 0) {
-      // console.log("Error:", error);
       return res.status(404).send(`Cannot find countries`);
     }
     res.status(201).json(response);

@@ -8,17 +8,16 @@
   background-repeat: repeat;
   min-height: 100vh;
   height: 100%;
-  /* background-size: cover; */
 }
 .containerB1 {
   display: flex;
-  justify-content: center; /*Centro la tarjeta*/
+  justify-content: center;
 }
 .containerC1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center; /*toda la info centrada*/
+  align-items: center;
   background: linear-gradient(
     90deg,
     rgba(25, 25, 25, 0.9) 0%,

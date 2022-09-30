@@ -19,17 +19,6 @@ export default function About() {
                     Hi everyone! This website was created as an{" "}
                     <b>Individual Project</b> for <b>Henry</b>'s Bootcamp.
                   </span>
-                  {/* <p>
-                    The thematic was about <b>COUNTRIES</b>, generating a list
-                    of them, exploring the details of each one, applying
-                    filters, doing different sorting, and searching through a
-                    search bar. And then combining all of that.
-                  </p>
-                  <p>
-                    The website also had to be able to create activities, which
-                    had to be uploaded to the database, and then be used to
-                    filter the countries that had those activities.
-                  </p> */}
                   <span>
                     The theme was about <b>Countries of the world</b>, following
                     certain mandatory guidelines:

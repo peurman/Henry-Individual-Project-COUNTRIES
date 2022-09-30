@@ -1,4 +1,3 @@
-// Importa las action types acá
 import {
   GET_ALL_COUNTRIES,
   GET_COUNTRY_DETAIL,
@@ -11,8 +10,6 @@ import {
   ERROR_RECEIVED_1,
   ERROR_RECEIVED_2,
   EMPTY_ERROR,
-  // COUNTRY_BY_ACTIVITY, // -> lo hago en Home
-  // DELETE_ACTIVITY, // NO PEDIDA
 } from "../actions";
 
 const initialState = {
@@ -29,30 +26,30 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_COUNTRIES:
       return {
         ...state,
-        countries: action.payload, //solo actualizo esta prop
-        countriesBackUp: action.payload, // hago backup para seguir trabajando con essos paises
+        countries: action.payload,
+        countriesBackUp: action.payload,
       };
     case GET_COUNTRY_DETAIL:
       return {
         ...state,
-        countryDetail: action.payload, //solo actualizo esta prop
+        countryDetail: action.payload,
       };
     case GET_COUNTRY_BY_SEARCH:
       return {
         ...state,
-        countries: action.payload, // todos los paises que salgan por busqueda
-        countriesBackUp: action.payload, // hago backup para seguir trabajando con essos paises
+        countries: action.payload,
+        countriesBackUp: action.payload,
       };
     case GET_COUNTRIES_BY_FILTER:
       return {
         ...state,
-        countries: action.payload, // todos los paises que salgan por busqueda
-        countriesBackUp: action.payload, // hago backup para seguir trabajando con essos paises
+        countries: action.payload,
+        countriesBackUp: action.payload,
       };
     case POST_NEW_ACTIVITY:
       return {
         ...state,
-        activityDetail: action.payload, //solo actualizo esta prop
+        activityDetail: action.payload,
       };
     case GET_ALL_ACTIVITIES:
       return {
@@ -63,44 +60,28 @@ const rootReducer = (state = initialState, action) => {
     case EMPTY_STATE:
       return {
         ...state,
-        countryDetail: {}, // -> vacio detalle país
+        countryDetail: {},
       };
     case UPDATE_COUNTRIES:
       return {
         ...state,
-        countries: action.payload, // actualizo países
+        countries: action.payload,
       };
     case ERROR_RECEIVED_1:
       return {
         ...state,
-        error: 1, // error en el search pais
+        error: 1,
       };
     case ERROR_RECEIVED_2:
       return {
         ...state,
-        error: 2, // error en el filtro x continente
+        error: 2,
       };
     case EMPTY_ERROR:
       return {
         ...state,
-        error: 0, // -> vacío error
+        error: 0,
       };
-    // case COUNTRY_BY_ACTIVITY: // -> lo hago en componente HOME
-    //   const allcountries = state.countries;
-    //   const countriesFiltered = allcountries.filter((c) =>
-    //           c.activities.find((a) => a.id === action.payload)
-    //         );
-    //   return {
-    //     ...state,
-    //     countries: countriesFiltered, // los paises filtrados segun actividad
-    //   };
-
-    // ↓↓↓↓↓↓↓↓NO PEDIDA↓↓↓↓↓↓↓↓
-    // case DELETE_ACTIVITY:
-    //   return {
-    //     // ...state,
-    //     // activities: action.payload // state.activities.filter(({ id }) => id !== action.payload),
-    //   };
     default:
       return state;
   }

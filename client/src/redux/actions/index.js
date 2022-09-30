@@ -10,18 +10,14 @@ export const ERROR_RECEIVED_1 = "ERROR_RECEIVED_1";
 export const ERROR_RECEIVED_2 = "ERROR_RECEIVED_2";
 export const EMPTY_ERROR = "EMPTY_ERROR";
 
-// export const COUNTRY_BY_ACTIVITY = "COUNTRY_BY_ACTIVITY"; // -> lo hago en Home
-// export const DELETE_ACTIVITY = "DELETE_ACTIVITY"; // NO PEDIDA
+const axios = require("axios");
 
-const axios = require("axios"); // también uso fetch
-
-// GET_ALL_COUNTRIES con AXIOS
 export const getAllCountries = () => {
   return async function (dispatch) {
     const response = await axios.get("/countries");
     dispatch({
       type: GET_ALL_COUNTRIES,
-      payload: response.data, // -> trae arreglo de objetos paises
+      payload: response.data,
     });
   };
 };
@@ -38,7 +34,6 @@ export const getAllCountries = () => {
 //   };
 // };
 
-// GET_COUNTRY_DETAIL x ID con AXIOS
 export const getCountryDetail = (id) => {
   return async (dispatch) => {
     const response = await axios.get("/countries/" + id);
@@ -62,7 +57,6 @@ export const getCountryDetail = (id) => {
 //   };
 // };
 
-// GET_COUNTRY_BY_SEARCH
 export function getCountryxSearch(continent, name) {
   return async function (dispatch) {
     try {
@@ -71,19 +65,16 @@ export function getCountryxSearch(continent, name) {
       );
       dispatch({
         type: GET_COUNTRY_BY_SEARCH,
-        payload: response.data, // -> trae paises que matchean con la busqueda
+        payload: response.data,
       });
     } catch (error) {
-      // console.log(error);
-      // alert("No countries were found with the selected search");
       dispatch({
-        type: ERROR_RECEIVED_1, // -> cambio el flag de la prop "error"
+        type: ERROR_RECEIVED_1,
       });
     }
   };
 }
 
-// GET_COUNTRIES_BY_FILTER
 export function getCountriesxFilter(continent, name) {
   return async function (dispatch) {
     try {
@@ -92,19 +83,17 @@ export function getCountriesxFilter(continent, name) {
       );
       dispatch({
         type: GET_COUNTRIES_BY_FILTER,
-        payload: response.data, // -> trae objeto con ese país
+        payload: response.data,
       });
     } catch (error) {
       console.log(error);
       dispatch({
-        type: ERROR_RECEIVED_2, // -> cambio el flag de la prop "error"
+        type: ERROR_RECEIVED_2,
       });
-      // alert("No se encontraron países");
     }
   };
 }
 
-// POST_NEW_ACTIVITY
 export const postNewActivity = (values) => {
   return async function (dispatch) {
     try {
@@ -117,7 +106,6 @@ export const postNewActivity = (values) => {
   };
 };
 
-// GET ALL ACTIVITIES
 export const getAllActivities = () => async (dispatch) => {
   const response = await axios.get("/activities");
   dispatch({
@@ -126,14 +114,12 @@ export const getAllActivities = () => async (dispatch) => {
   });
 };
 
-// EMPTY STATE (en el FRONT)
 export const emptyState = () => (dispatch) => {
   dispatch({
     type: EMPTY_STATE,
   });
 };
 
-// UPDATE COUNTRIES (en el FRONT)
 export const updateCountries = (value) => (dispatch) => {
   dispatch({
     type: UPDATE_COUNTRIES,
@@ -141,22 +127,12 @@ export const updateCountries = (value) => (dispatch) => {
   });
 };
 
-// EMPTY ERROR (en el FRONT)
 export const emptyError = () => (dispatch) => {
   dispatch({
     type: EMPTY_ERROR,
   });
 };
 
-// COUNTRY BY ACTIVITY (en el FRONT) - la hago en componente HOME
-// export const countryByActivity = (value) => (dispatch) => {
-//   dispatch({
-//     type: COUNTRY_BY_ACTIVITY,
-//     payload: value,
-//   });
-// };
-
-// ↓↓↓↓↓↓↓↓NO PEDIDA↓↓↓↓↓↓↓↓
 // export const deleteActivity = (id) => {
 //    return async function (dispatch) {
 //     try {

@@ -3,23 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllCountries, postNewActivity } from "../../redux/actions";
 import "../../styles/CreateActivity.css";
-// importo Message para el Pop-Up
 import Message from "../Message/Message";
 
-// componente CREATE ACTIVITY
 export default function CreateActivity() {
   const dispatch = useDispatch();
 
-  const totalCountries = useSelector((state) => state.countries); // -> uso estado GLOBAL para traer los paises
+  const totalCountries = useSelector((state) => state.countries);
 
-  const [errors, setErrors] = React.useState({}); // -> uso estado LOCAL para almacenar errores
+  const [errors, setErrors] = React.useState({});
   const [countriesSelected, setCountriesSelected] = React.useState([]);
-  // const [switcher, setSwitcher] = React.useState(""); // -> para la validación
-  const [successMsg, setSuccessMsg] = React.useState("none"); // -> para POPUP de ACTIVIDAD CREADA
+  const [successMsg, setSuccessMsg] = React.useState("none");
 
-  // estado LOCAL con todo el FORMULARIO
   let [myForm, setMyForm] = React.useState({
-    // -> uso estado local
     name: "",
     duration: "",
     difficulty: "",
@@ -27,13 +22,10 @@ export default function CreateActivity() {
     countryId: [],
   });
 
-  // GET PAISES y GET ACTIVITIES al BACK
   useEffect(() => {
-    // console.log("PIDO PAISES Y ACTIVIDADES DESDE CREATE ACTIVITY");
-    dispatch(getAllCountries()); // -> me traigo todos los países
-  }, [dispatch]); // -> dependencia en dispatch para evitar repecitiones
+    dispatch(getAllCountries());
+  }, [dispatch]);
 
-  // FUNCION para VALIDAR NOMBRE y DURACION
   function validate(input) {
     let errors = {};
 
@@ -42,13 +34,13 @@ export default function CreateActivity() {
         "The name of the activity is required, spaces are not allowed";
     } else if (!/^[a-zA-Z0-9& áéíóú]+$/.test(input.name)) {
       errors.name =
-        "Activity name is invalid, no special characters are allowed"; // -> "/[$%&|<>#]/" valida caracteres especiales
+        "Activity name is invalid, no special characters are allowed";
     }
 
     if (!input.duration) {
       errors.duration = "Duration is required";
     } else if (!/^([1-9][0-9]+|[1-9])/.test(input.duration)) {
-      errors.duration = "Duration must be a number between 1 and 24"; // -> "/^\d+$/" RegExp oara validar nros positivos
+      errors.duration = "Duration must be a number between 1 and 24";
     } else if (input.duration > 24 || input.duration === 0) {
       errors.duration = "Duration must be between 1 and 24";
     }
@@ -69,7 +61,6 @@ export default function CreateActivity() {
     return errors;
   }
 
-  // ORDENO los paises para mostrarlos en listado
   let ordered = totalCountries.sort(function (a, b) {
     if (a.name > b.name) {
       return 1;
@@ -80,11 +71,10 @@ export default function CreateActivity() {
     return 0;
   });
 
-  // con CADA CAMBIO seteo la prop del FORM y del ERROR
   let handleChange = (e) => {
     setMyForm({
       ...myForm,
-      [e.target.name]: e.target.value, // -> voy seteando cada valor
+      [e.target.name]: e.target.value,
     });
     setErrors(
       validate({
@@ -94,65 +84,58 @@ export default function CreateActivity() {
     );
   };
 
-  // Agreo PAIS al arreglo countriesSelected
   let handleChangeCountry = (e) => {
-    let selected = totalCountries.find((c) => c.name === e.target.value); // -> pais seleccionado
+    let selected = totalCountries.find((c) => c.name === e.target.value);
 
     if (!countriesSelected.find((el) => el.id === selected.id)) {
-      let list = [...myForm.countryId, selected.id]; // -> agrego id del pais seleccionad
+      let list = [...myForm.countryId, selected.id];
       setErrors(
         validate({
           ...myForm,
-          countryId: list, // -> actualizo lista en el error
+          countryId: list,
         })
       );
       setMyForm({
         ...myForm,
-        countryId: list, // -> actualizo listado de ID de paises
+        countryId: list,
       });
-      setCountriesSelected((elements) => [...elements, selected]); // -> agrego al array paises elegido}
-    } else setSuccessMsg("onlyOnce"); // -> POPUP NO podés agregar 2 veces el mismo pais!
+      setCountriesSelected((elements) => [...elements, selected]);
+    } else setSuccessMsg("onlyOnce");
   };
 
-  // elimino BANDERA y NOMBRE de algun pais elegido
   function OnCloseFlag(id) {
     let depurated = countriesSelected.filter((c) => c.id !== id);
     let depuratedIds = myForm.countryId.filter((el) => el !== id);
     setMyForm({
       ...myForm,
-      countryId: depuratedIds, // -> agrego al array el ID del pais
+      countryId: depuratedIds,
     });
     setErrors(
       validate({
         ...myForm,
-        countryId: depuratedIds, // -> actualizo lista en el error
+        countryId: depuratedIds,
       })
     );
     document.getElementById("countries").selectedIndex = "";
-    setCountriesSelected(depurated); // -> actualizo  array paises elegidos, sacando el que se cerro
+    setCountriesSelected(depurated);
   }
 
-  // SUBMIT > solicito el POST!!
   let handleSubmit = (e) => {
-    e.preventDefault(); // -> al querer salir  aviso x info cargada
-    dispatch(postNewActivity(myForm)); // -> solicito el POST
-    updateFilters(); // -> limpio filtros
-    setCountriesSelected([]); // -> vacía listado
+    e.preventDefault();
+    dispatch(postNewActivity(myForm));
+    updateFilters();
+    setCountriesSelected([]);
     setMyForm({
-      // -> limpio formulario
       name: "",
       duration: "",
       difficulty: "",
       season: "",
       countryId: [],
     });
-    setSuccessMsg("createAct"); // -> POPUP actividad creada!
+    setSuccessMsg("createAct");
   };
 
-  //reseteo ambos filtros
   function updateFilters() {
-    // document.getElementById("nameActivity").selectedIndex = "";
-    // document.getElementById("durActivity").selectedIndex = 0;
     document.getElementById("difficulty").selectedIndex = "";
     document.getElementById("season").selectedIndex = "";
     document.getElementById("countries").selectedIndex = "";
@@ -177,7 +160,6 @@ export default function CreateActivity() {
                       type="text"
                       placeholder="Please write a name..."
                       onChange={(e) => {
-                        // setSwitcher("nameActivity");
                         handleChange(e);
                       }}
                       value={myForm.name}
@@ -198,7 +180,6 @@ export default function CreateActivity() {
                       type="text"
                       placeholder="Please write a number..."
                       onChange={(e) => {
-                        // setSwitcher("durActivity");
                         handleChange(e);
                       }}
                       value={myForm.duration}
@@ -217,7 +198,6 @@ export default function CreateActivity() {
                       id="difficulty"
                       className={!errors.difficulty ? "filter" : "dangerFilter"}
                       onChange={(e) => {
-                        // setSwitcher("difficulty");
                         handleChange(e);
                       }}
                     >
@@ -243,7 +223,6 @@ export default function CreateActivity() {
                       id="season"
                       name="season"
                       onChange={(e) => {
-                        // setSwitcher("season");
                         handleChange(e);
                       }}
                     >
@@ -269,7 +248,6 @@ export default function CreateActivity() {
                       id="countries"
                       name="country"
                       onChange={(e) => {
-                        // setSwitcher("countries");
                         handleChangeCountry(e);
                       }}
                     >
@@ -337,7 +315,7 @@ export default function CreateActivity() {
                       >
                         Create Activity
                       </button>
-                      <Message // -> Renderizo Comp Message mandando "true"
+                      <Message
                         onClose={() => setSuccessMsg("none")}
                         show={successMsg}
                       />
